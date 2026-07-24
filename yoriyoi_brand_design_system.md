@@ -1,7 +1,7 @@
 # Yoriyoi Brand Design System
 
-**Version:** 0.1  
-**Status:** Brand foundation draft  
+**Version:** 0.2  
+**Status:** Foundation + implementation tokens（HEX・フォント・スケール・コンポーネントを確定）  
 **Purpose:** Yoriyoiのブランド思想、言語表現、ビジュアル、UI/UX、HCD原則を一貫して運用するための基礎設計  
 **Primary use cases:** コーポレートサイト、名刺QRから遷移するハブサイト、AIマッチングサービス、各種紹介資料、SNS・note等の発信
 
@@ -283,26 +283,45 @@ AIの推薦を決定事項にせず、本人とプロジェクト双方の意思
 
 ## 12. Color System
 
-ロゴの色を基準に、役割のある最小限のカラーパレットを設計します。
+ロゴの色を基準に、役割のある最小限のカラーパレットを設計します。ブランドガイド（6色パレット）と実装（hub-site の `:root`）の値を一致させ、確定トークンとして扱います。
 
-### Primary Colors
+### Palette (Confirmed HEX)
 
-| Role | Direction |
-|---|---|
-| Primary Red | 朱赤。人のぬくもり、意思、重要なアクション |
-| Primary Yellow | 山吹色。希望、気づき、補助的な強調 |
-| Background | 真っ白ではない温かなオフホワイト |
-| Text | 黒より柔らかなチャコールブラウン |
+| Token | Name | HEX | 役割 |
+|---|---|---|---|
+| `--color-red` | Sun Red | `#C8452A` | Primary。重要アクション、人のぬくもり |
+| `--color-red-deep` | Sun Red / Deep | `#A63A22` | Primary の hover / active、濃い強調 |
+| `--color-yellow` | Sand Beige（山吹） | `#E4A02B` | Accent。気づき、補助強調、縒り線の一方 |
+| `--color-bg` | Off White | `#FBF7F0` | 背景 |
+| `--color-surface` | Beige | `#F2EBDD` | 面（カード、セクション） |
+| `--color-surface-2` | Greige | `#EAE1D0` | 一段沈んだ面、hover 面 |
+| `--color-border` | Border | `#E0D7C7` | 境界線 |
+| `--color-text` | Charcoal | `#332E29` | 本文 |
+| `--color-text-soft` | Charcoal / Soft | `#6C6257` | 補助文、キャプション |
+| `--color-white` | White | `#FFFFFF` | 反転文字、最前面の面 |
 
-### Secondary Colors
+### State Colors
 
-| Role | Direction |
-|---|---|
-| Surface | 淡いベージュ、グレージュ |
-| Supporting | ごく淡いグレーまたはセージ |
-| Border | 背景と識別できる穏やかな中間色 |
-| Error | ブランド朱赤とは明確に区別できるエラー色 |
-| Success | 色だけに依存しない、控えめな成功表現 |
+状態は「色＋アイコン＋ラベル」で必ず併用する（色のみに依存しない）。ブランド朱赤と混同しない色を選ぶ。
+
+| Token | HEX | 用途 |
+|---|---|---|
+| `--color-error` | `#A01B12` | エラー。朱赤より深く青みのある赤。必ず ⚠ アイコン＋テキスト併用 |
+| `--color-success` | `#3E6B4E` | 成功。彩度を抑えたセージ。✓ アイコン＋テキスト併用 |
+| `--color-warning` | `#B8791F` | 注意。山吹を一段沈めた色。⚠ アイコン＋テキスト併用 |
+| `--color-focus` | `#A63A22` | フォーカスリング（deep red ベース） |
+
+### Contrast（算出値・実装時にツール再検証）
+
+| 前景 / 背景 | 比率 | 判定 |
+|---|---|---|
+| `--color-text` #332E29 / `--color-bg` #FBF7F0 | ≈ 12.6:1 | AAA |
+| `--color-text-soft` #6C6257 / `--color-bg` | ≈ 5.6:1 | AA（本文可） |
+| White / `--color-red` #C8452A | ≈ 4.8:1 | AA（本文可・ぎりぎり → 太字/大サイズ推奨） |
+| White / `--color-red-deep` #A63A22 | ≈ 6.2:1 | AA |
+| `--color-yellow` #E4A02B / `--color-bg`（文字利用時） | ≈ 1.7:1 | ✗ 本文不可（アクセント専用） |
+
+※上記は算出値。実装時に自動ツール（axe / WebAIM 等）で最終検証する。
 
 ### Accessibility Rules
 
@@ -316,19 +335,36 @@ AIの推薦を決定事項にせず、本人とプロジェクト双方の意思
 
 ## 13. Typography
 
-### Japanese Typography
+### Font Families (Confirmed)
 
-#### Heading
+見出しは編集的な明朝、本文は可読性の高いゴシックで対比をつける。すべて Google Fonts 系で無償・Web 埋め込み可能なものを基準にする。
 
-人間らしい柔らかさと、編集的な知性を感じる書体。
+| Role | Family | Fallback |
+|---|---|---|
+| Heading / Display | **Noto Serif JP**（Medium 500 / SemiBold 600） | `"Hiragino Mincho ProN","Yu Mincho",serif` |
+| Body | **Noto Sans JP**（Regular 400 / Medium 500） | `"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif` |
+| Accent（限定） | Noto Serif JP | 見出しと同じ。装飾的な一文・引用に限定 |
+| Latin / 数字 | Noto Sans（本文）/ Noto Serif（見出し） | `system-ui` |
 
-#### Body
+- ロゴのワードマークは専用ロゴデータを使用し、本文フォントで代替しない。
 
-長文でも読みやすく、文字の形が明瞭なゴシック体。
+### Type Scale（base 16px / rem）
 
-#### Accent
+日本語本文は行間 1.7 を基準にゆとりを持たせる。
 
-必要に応じて、ごく限定的に明朝体または手書き的な要素を使用する。
+| Token | 用途 | size | line-height | weight | family |
+|---|---|---|---|---|---|
+| `--fs-display` | ページ主見出し | 2.5rem (40px) | 1.3 | 600 | Serif |
+| `--fs-h1` | H1 | 2rem (32px) | 1.35 | 600 | Serif |
+| `--fs-h2` | H2 | 1.5rem (24px) | 1.4 | 600 | Serif |
+| `--fs-h3` | H3 | 1.25rem (20px) | 1.5 | 500 | Serif |
+| `--fs-body-lg` | リード文 | 1.125rem (18px) | 1.8 | 400 | Sans |
+| `--fs-body` | 本文 | 1rem (16px) | 1.7 | 400 | Sans |
+| `--fs-sm` | 補助 | 0.875rem (14px) | 1.6 | 400 | Sans |
+| `--fs-caption` | キャプション（最小） | 0.8125rem (13px) | 1.5 | 400 | Sans |
+
+- 13px を最小とし、これより小さい文字を本文・ラベルに使わない。
+- 見出しの明朝は Medium(500)〜SemiBold(600)。Light は使わない（細すぎ回避）。
 
 ### Typography Rules
 
@@ -339,6 +375,8 @@ AIの推薦を決定事項にせず、本人とプロジェクト双方の意思
 - 行間と段落間に十分な余白を設ける
 - 日本語の文字量を前提に設計する
 - 英語を装飾として過剰使用しない
+- 明朝は見出し・引用に限定し、長い本文には使わない
+- Light ウェイトを本文・見出しに使わない（細すぎ回避）
 
 ---
 
@@ -673,16 +711,20 @@ AIが答えを決めるのではなく、相性の理由や確認すべき条件
 
 ## 22. Items Requiring Future Definition
 
-このドキュメントはブランドデザインシステムの基礎です。実装時には以下を追加定義します。
+v0.2 で以下を確定した（→ **Part II §24–26** 参照）。
 
-- 正式なカラーコード
-- 色ごとのコントラスト検証
-- 採用フォントとフォールバック
+- ✅ 正式なカラーコード → §12
+- ✅ 色ごとのコントラスト検証（算出値・要ツール再検証） → §12
+- ✅ 採用フォントとフォールバック → §13
+- ✅ スペーシングスケール（4px base） → §24
+- ✅ グリッドとブレークポイント → §24
+- ✅ ボタン、フォーム、カード、リンク行等の詳細仕様 → §25
+- ✅ パターン・モチーフ（4文様）の運用 → §26
+
+今後さらに定義する項目：
+
 - ロゴのアイソレーションと最小使用サイズ
 - ロゴの背景別使用ルール
-- 8px等のスペーシングスケール
-- グリッドとブレークポイント
-- ボタン、フォーム、カード、タグ等の詳細仕様
 - AIマッチング結果画面の情報構造
 - エラー、空状態、データ不足時の文言
 - モーションガイドライン
@@ -691,6 +733,7 @@ AIが答えを決めるのではなく、相性の理由や確認すべき条件
 - プライバシー、データ利用、AI説明に関する表示要件
 - ユーザビリティテスト計画
 - デザイン・コンテンツレビュー体制
+- ダークモード対応方針
 
 ---
 
@@ -707,3 +750,133 @@ AIは答えを決める存在ではありません。相性の理由や確認す
 Yoriyoiのデザインは、温かく、静かで、知的であること。情報の理解を優先し、行動を急かさず、利用者の意思と多様な選択を尊重します。
 
 **それぞれの可能性を、よりよい出会いへ。**
+
+---
+
+# Part II — Implementation Tokens (v0.2)
+
+このパートは §22 の「今後定義」を確定したもの。色・文字は §12 / §13、その他の基盤を以下に定義する。
+
+## 24. Spacing / Radius / Elevation / Layout
+
+### Spacing Scale（4px base）
+
+| Token | px |
+|---|---|
+| `--space-1` | 4 |
+| `--space-2` | 8 |
+| `--space-3` | 12 |
+| `--space-4` | 16 |
+| `--space-5` | 24 |
+| `--space-6` | 32 |
+| `--space-8` | 48 |
+| `--space-10` | 64 |
+| `--space-12` | 96 |
+
+- 8px を基本リズムに、余白は §11「余白」の思想どおり広めに取る。
+
+### Radius
+
+| Token | px | 用途 |
+|---|---|---|
+| `--radius-sm` | 8 | タグ、入力欄 |
+| `--radius` | 14 | ボタン、カード（hub-site 準拠） |
+| `--radius-lg` | 20 | 大きな面、モーダル |
+| `--radius-pill` | 999 | ピル型（限定） |
+
+### Elevation（Shadow）
+
+影は弱く、紙の質感に馴染ませる。
+
+| Token | 値 |
+|---|---|
+| `--shadow-sm` | `0 1px 3px rgba(51,46,41,.05)` |
+| `--shadow` | `0 2px 8px rgba(51,46,41,.06)` |
+| `--shadow-lg` | `0 8px 24px rgba(51,46,41,.10)` |
+
+### Breakpoints & Container
+
+モバイルファースト。
+
+| Token | min-width |
+|---|---|
+| `--bp-sm` | 480px |
+| `--bp-md` | 768px |
+| `--bp-lg` | 1024px |
+| `--bp-xl` | 1280px |
+
+- コンテナ最大幅: 名刺ハブサイト = 720px / コーポレートサイト本文 = 1080px。
+- グリッド: コーポレートは 12 カラム、gap 24px を基準。
+
+### :root Token Reference（CSS）
+
+```css
+:root{
+  /* color */
+  --color-red:#C8452A; --color-red-deep:#A63A22; --color-yellow:#E4A02B;
+  --color-bg:#FBF7F0; --color-surface:#F2EBDD; --color-surface-2:#EAE1D0;
+  --color-border:#E0D7C7; --color-text:#332E29; --color-text-soft:#6C6257; --color-white:#fff;
+  --color-error:#A01B12; --color-success:#3E6B4E; --color-warning:#B8791F; --color-focus:#A63A22;
+  /* radius / shadow */
+  --radius-sm:8px; --radius:14px; --radius-lg:20px; --radius-pill:999px;
+  --shadow-sm:0 1px 3px rgba(51,46,41,.05);
+  --shadow:0 2px 8px rgba(51,46,41,.06);
+  --shadow-lg:0 8px 24px rgba(51,46,41,.10);
+  /* spacing */
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px;
+  --space-6:32px; --space-8:48px; --space-10:64px; --space-12:96px;
+}
+```
+
+hub-site の現行 `:root`（`--red` 等）はこの命名へ段階的に寄せる。既存名はエイリアスとして当面併存可。
+
+## 25. Component Specifications
+
+トークン参照で最小仕様を定義する（§16 の思想を実装値に落としたもの）。共通: タップ領域 min 44×44px、フォーカスは `--color-focus` の 2px outline + 2px offset。
+
+### Button / Primary
+- bg `--color-red` → hover/active `--color-red-deep`、文字 `--color-white`（weight 500）
+- padding `12px 20px`、radius `--radius`、min-height 44px
+- 最重要アクション 1〜2 個まで（§16）。例:「相性を確認する」
+
+### Button / Secondary
+- bg `--color-surface`、文字 `--color-text`、border 1px `--color-border`
+- hover: bg `--color-surface-2`
+
+### Button / Tertiary・Text link
+- 文字 `--color-text`、hover で `--color-red` ＋ underline
+- 心理的負担の低い行動（「あとで見る」「今は決めない」）
+
+### Link Row（名刺ハブの主要素）
+- 構成: `[アイコン] ラベル … [外部リンクのシェブロン]`
+- 面 `--color-surface`、radius `--radius`、padding `--space-4`
+- 外部リンクは視覚的に明示（シェブロン / ↗）＋ `rel="noopener"`
+
+### Card
+- 面 `--color-surface`、border 1px `--color-border`、radius `--radius`、shadow `--shadow-sm`、padding `--space-5`
+
+### Input / Form
+- 面 `--color-white`、border 1px `--color-border`、radius `--radius-sm`、padding `12px`
+- focus: border `--color-focus` ＋ ring。エラー時は border `--color-error` ＋ アイコン ＋ 説明文
+- ラベルは常時表示（プレースホルダのみに頼らない）
+
+### Divider / 縒り線モチーフ
+- セクション区切りに、朱赤 × 山吹の縒り紐 SVG を細く低彩度で使用（hub-site の `.twist` を踏襲）
+- 主役にしない・多用しない（§14）
+
+## 26. Pattern & Motif Library
+
+ブランドガイドのエンボス 4 文様を、UI の「ごく控えめな地紋」として定義する。
+
+| 文様 | 読み | 意味 | UI での用途 |
+|---|---|---|---|
+| 立涌文様 | たてわく | 立ちのぼる気運・発展 | ヒーローやセクション帯の地紋 |
+| 七宝繋ぎ | しっぽうつなぎ | 円＝縁が繋がる・調和 | 「つながり」を語る面の地紋 |
+| 網代 | あじろ | 編み・強度・関係性 | フッター／区切りの地紋 |
+| 檜垣文様 | ひがき | 守り・厄除け | カバー画像のプレースホルダ等 |
+
+### Usage Rules
+- トーンオントーン（オフホワイト／ベージュ上に極低コントラスト）で、エンボス＝紙の質感として扱う。opacity は目安 3–8%。
+- 本文テキストの直下には敷かない（可読性優先）。
+- 一画面で使う文様は基本 1 種類。複数を混在させない。
+- §14 の禁止（婚礼・宗教・和風に寄りすぎ）を必ず参照。柄を「装飾の主役」にしない。
