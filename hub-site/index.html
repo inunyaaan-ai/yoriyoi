@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Yoriyoi ｜ 名刺ハブサイト</title>
+<meta name="description" content="名刺から、その人の活動・発信・連絡先へ。Yoriyoiの名刺ハブサイト。" />
+<style>
+  /* ============================================================
+     Yoriyoi Business Card Hub Site
+     Brand: yoriyoi_brand_design_system.md 準拠
+     - 温かなオフホワイト背景 / チャコールブラウン文字
+     - 朱赤(重要) / 山吹色(補助) を限定的に / 縒り合う線モチーフ
+     - リンクをファーストビューに収めるコンパクト構成
+     ============================================================ */
+
+  :root {
+    --red:        #C8452A;
+    --red-deep:   #A63A22;
+    --yellow:     #E4A02B;
+    --bg:         #FBF7F0;
+    --surface:    #F2EBDD;
+    --surface-2:  #EAE1D0;
+    --text:       #332E29;
+    --text-soft:  #6C6257;
+    --border:     #E0D7C7;
+    --white:      #FFFFFF;
+    --shadow:     0 2px 8px rgba(51, 46, 41, 0.06);
+    --shadow-lg:  0 8px 24px rgba(51, 46, 41, 0.10);
+    --radius:     14px;
+    --maxw:       460px;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP",
+                 "Yu Gothic", "Meiryo", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    min-height: 100vh;
+    background:
+      radial-gradient(1000px 320px at 15% -5%, rgba(228,160,43,0.06), transparent 60%),
+      radial-gradient(800px 300px at 90% 0%, rgba(200,69,42,0.05), transparent 55%);
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 18px 28px; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; border-radius: 8px; }
+
+  /* ---------------- Cover + Avatar (compact) ---------------- */
+  .cover {
+    position: relative;
+    height: 88px;
+    margin: 0 -18px;
+    background: linear-gradient(120deg, #2B4A5E 0%, #35606F 100%);
+    overflow: hidden;
+  }
+  .cover::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(480px 160px at 20% 120%, rgba(228,160,43,0.22), transparent 60%),
+      radial-gradient(480px 170px at 85% -20%, rgba(200,69,42,0.20), transparent 60%);
+  }
+  .avatar {
+    position: relative;
+    width: 82px; height: 82px;
+    margin: -44px auto 0;
+    border-radius: 50%;
+    border: 3px solid var(--bg);
+    background: var(--surface-2);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden; display: block; z-index: 2;
+  }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .avatar .initials {
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; height: 100%;
+    font-size: 30px; font-weight: 600; color: var(--text-soft); letter-spacing: 0.04em;
+  }
+
+  /* ---------------- Identity (compact) ---------------- */
+  .identity { text-align: center; margin-top: 10px; }
+  .identity .relation {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; letter-spacing: 0.05em; color: var(--text-soft);
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 3px 10px; border-radius: 999px; margin-bottom: 8px;
+  }
+  .relation .dot { width: 12px; height: 12px; flex: none; }
+  .identity h1 { font-size: 22px; font-weight: 700; letter-spacing: 0.01em; margin: 0; }
+  .identity .role {
+    font-size: 13px; color: var(--text-soft); margin: 3px 0 0;
+  }
+  .identity .role .en { color: var(--border); margin: 0 7px; }
+  .identity .tagline {
+    margin: 7px auto 0; max-width: 34ch; font-size: 13px; color: var(--text); line-height: 1.5;
+  }
+
+  /* 縒り divider (thin) */
+  .twist { display: block; width: 100%; height: 16px; margin: 11px 0 8px; opacity: 0.9; }
+
+  /* ---------------- Sections ---------------- */
+  .section { margin-top: 14px; }
+  .section:first-of-type { margin-top: 4px; }
+  .section-head {
+    display: flex; align-items: baseline; gap: 8px; margin: 0 2px 7px;
+  }
+  .section-head h2 { font-size: 12px; font-weight: 700; letter-spacing: 0.07em; color: var(--text); margin: 0; }
+  .section-head .hint { font-size: 11px; color: var(--text-soft); }
+
+  /* ---------------- Link rows (compact, single line) ---------------- */
+  .links { display: flex; flex-direction: column; gap: 8px; }
+  .link {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    text-decoration: none; color: var(--text);
+    box-shadow: var(--shadow);
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .link:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); border-color: #D3C9B6; }
+  .link:active { transform: translateY(0); }
+  .link .ico {
+    width: 34px; height: 34px; flex: none; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; background: var(--surface);
+  }
+  .link .ico svg { width: 20px; height: 20px; display: block; }
+  .link .label { flex: 1 1 auto; min-width: 0; font-size: 14.5px; font-weight: 600; }
+  .link .ext { flex: none; width: 16px; height: 16px; color: var(--text-soft); opacity: .65; }
+  .link .ext svg { width: 100%; height: 100%; }
+
+  /* ---------------- Footer ---------------- */
+  .foot { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center; }
+  .foot .logo { width: 116px; height: auto; display: block; margin: 0 auto; }
+  .foot .by { font-size: 11px; color: var(--text-soft); margin-top: 8px; letter-spacing: 0.03em; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <main class="wrap">
+
+    <!-- Cover -->
+    <div class="cover" role="img" aria-label="活動の様子のカバー画像（プレースホルダー）"></div>
+
+    <!-- Avatar : 写真を入れる場合は .initials を <img src alt> に差し替え -->
+    <div class="avatar" aria-hidden="true"><span class="initials">YY</span></div>
+
+    <!-- Identity -->
+    <section class="identity">
+      <span class="relation">
+        <svg class="dot" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15c4-6 6 6 10 0s6-6 8 0" fill="none" stroke="#C8452A" stroke-width="2.4" stroke-linecap="round"/><path d="M3 9c4-6 6 6 10 0s6-6 8 0" fill="none" stroke="#E4A02B" stroke-width="2.4" stroke-linecap="round"/></svg>
+        Yoriyoi パートナー
+      </span>
+      <h1>山田 よりよ</h1>
+      <p class="role">フリーランス編集者<span class="en">/</span>コミュニティ運営</p>
+      <p class="tagline">人とプロジェクトの接点を、よりよい出会いへ。</p>
+    </section>
+
+    <!-- 縒り divider -->
+    <svg class="twist" viewBox="0 0 460 16" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 8 C 70 0, 120 16, 190 8 S 320 0, 460 8" fill="none" stroke="#C8452A" stroke-width="2" stroke-linecap="round"/>
+      <path d="M0 8 C 70 16, 120 0, 190 8 S 320 16, 460 8" fill="none" stroke="#E4A02B" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+
+    <!-- Links (flat / 見出しなし) -->
+    <section class="section">
+      <div class="links">
+        <a class="link" href="#">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#C8452A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15c4-7 6 7 10 0s6-7 6 0" transform="translate(0 1)"/><path d="M4 9c4-7 6 7 10 0s6-7 6 0" transform="translate(0 -1)"/></svg></span>
+          <span class="label">Yoriyoiとは</span>
+          <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="link" href="#" target="_blank" rel="noopener">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 8v8M8 8l6 8M16 8v8"/></svg></span>
+          <span class="label">note</span>
+          <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+        </a>
+        <a class="link" href="#" target="_blank" rel="noopener">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M11 9.5l4 2.5-4 2.5z" fill="#333" stroke="none"/></svg></span>
+          <span class="label">YouTube</span>
+          <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+        </a>
+        <a class="link" href="#" target="_blank" rel="noopener">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.1" fill="#333" stroke="none"/></svg></span>
+          <span class="label">Instagram</span>
+          <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+        </a>
+        <a class="link" href="#" target="_blank" rel="noopener">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h3l13 16h-3zM4 20l6-7M20 4l-6 7"/></svg></span>
+          <span class="label">X（Twitter）</span>
+          <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="foot">
+      <img class="logo" src="../assets/logo/yoriyoi_logo.svg" alt="Yoriyoi" />
+      <div class="by">それぞれの可能性を、よりよい出会いへ。</div>
+    </footer>
+
+  </main>
+</div>
+</body>
+</html>
