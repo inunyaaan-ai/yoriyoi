@@ -835,9 +835,12 @@ hub-site の現行 `:root`（`--red` 等）はこの命名へ段階的に寄せ�
 トークン参照で最小仕様を定義する（§16 の思想を実装値に落としたもの）。共通: タップ領域 min 44×44px、フォーカスは `--color-focus` の 2px outline + 2px offset。
 
 ### Button / Primary
-- bg `--color-red` → hover/active `--color-red-deep`、文字 `--color-white`（weight 500）
+- bg `--color-text`（墨 #332E29）→ hover `#211D19`、文字 `--color-white`（weight 500）
 - padding `12px 20px`、radius `--radius`、min-height 44px
 - 最重要アクション 1〜2 個まで（§16）。例:「相性を確認する」
+
+> **なぜ墨か（HCD判断）**: 白文字コントラスト ≈ 12.6:1（AAA）で安全。飽和した赤ベタは UI 慣習上「緊急・警告」に寄り、§9.6「急かさない」トーンや `--color-error`（赤）と競合する。ブランドガイドでも朱赤は「細い縒り線のアクセント」で面ベタには使っていない。よって **プライマリ面は墨、朱赤×山吹は縒りアイコン/ラインのアクセント**として残す。
+> 温かさを主役にしたい文脈では、深い朱赤 `--color-red-deep`（#A63A22, ≈ 6.2:1）を warm 系プライマリの代替として可。鮮やかな `--color-red`（#C8452A, ≈ 4.8:1）は面ベタCTAには非推奨（アクセント専用）。
 
 ### Button / Secondary
 - bg `--color-surface`、文字 `--color-text`、border 1px `--color-border`
