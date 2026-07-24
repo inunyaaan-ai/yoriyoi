@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Yoriyoi ｜ 名刺ハブサイト</title>
 <meta name="description" content="名刺から、その人の活動・発信・連絡先へ。Yoriyoiの名刺ハブサイト。" />
+<link rel="icon" type="image/svg+xml" href="../assets/logo/yoriyoi_mark.svg" />
 <!-- Fonts: 見出し=Noto Serif JP(明朝) / 本文=Noto Sans JP -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,6 +36,10 @@
     --maxw:       460px;
     --font-sans:  "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
     --font-serif: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+    /* 背景の地紋(§26)。立涌なら tatewaku.jpg、網代なら ajiro.jpg に差し替え */
+    --pattern:         url("../assets/patterns/shippou_tile.jpg"); /* 周期切出しの継ぎ目なしタイル(2柄分) */
+    --pattern-opacity: 0.55;
+    --pattern-size:    162px; /* タイル(2柄)の表示幅。小さく=細かい / 大きく=大きい柄 */
   }
 
   * { box-sizing: border-box; }
@@ -51,12 +56,23 @@
   }
 
   .page {
+    position: relative;
     min-height: 100vh;
     background:
       radial-gradient(1000px 320px at 15% -5%, rgba(228,160,43,0.06), transparent 60%),
       radial-gradient(800px 300px at 90% 0%, rgba(200,69,42,0.05), transparent 55%);
   }
-  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 18px 28px; }
+  /* 背景の地紋(§26): トーンオントーンで低不透明度。本文の可読性を優先 */
+  .page::before {
+    content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image: var(--pattern);
+    background-size: var(--pattern-size) auto;
+    background-repeat: repeat;
+    background-position: center top;
+    mix-blend-mode: multiply;
+    opacity: var(--pattern-opacity);
+  }
+  .wrap { position: relative; z-index: 1; max-width: var(--maxw); margin: 0 auto; padding: 0 18px 28px; }
   a { color: inherit; }
   :focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; border-radius: 8px; }
 
@@ -115,7 +131,7 @@
 
   /* ---------------- Sections ---------------- */
   .section { margin-top: 14px; }
-  .section:first-of-type { margin-top: 4px; }
+  .section:first-of-type { margin-top: 20px; }
   .section-head {
     display: flex; align-items: baseline; gap: 8px; margin: 0 2px 7px;
   }
@@ -137,7 +153,7 @@
   .link:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); border-color: #D3C9B6; }
   .link:active { transform: translateY(0); }
   .link .ico {
-    width: 34px; height: 34px; flex: none; border-radius: 10px;
+    width: 34px; height: 34px; flex: none; border-radius: 50%;
     display: flex; align-items: center; justify-content: center; background: var(--surface);
   }
   .link .ico svg { width: 20px; height: 20px; display: block; }
@@ -153,15 +169,16 @@
     box-shadow: 0 4px 14px rgba(51, 46, 41, 0.22);
   }
   .link--primary:hover { background: #211D19; border-color: #211D19; box-shadow: 0 6px 18px rgba(51, 46, 41, 0.28); }
-  .link--primary .ico { background: rgba(255, 255, 255, 0.12); }
-  .link--primary .ico svg path:first-child { stroke: var(--yellow); }
-  .link--primary .ico svg path:last-child { stroke: var(--red); }
+  .link--primary .ico { background: var(--bg); overflow: hidden; }
+  .link .ico .mark { width: 27px; height: 27px; display: block; object-fit: contain; }
+  /* 円で切り抜き、縒りの線端を円外に逃がして隠す */
+  .link--primary .ico .mark { width: 46px; height: 46px; }
   .link--primary .label { color: var(--white); font-weight: 700; }
   .link--primary .ext { color: var(--white); opacity: .8; }
 
   /* ---------------- Footer ---------------- */
   .foot { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center; }
-  .foot .logo { width: 116px; height: auto; display: block; margin: 0 auto; }
+  .foot .logo { width: 240px; height: auto; display: block; margin: 0 auto; }
   .foot .by { font-family: var(--font-serif); font-size: 12.5px; font-weight: 500; color: var(--text-soft); margin-top: 8px; letter-spacing: 0.03em; }
 
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
@@ -181,24 +198,18 @@
     <section class="identity">
       <span class="relation">
         <svg class="dot" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15c4-6 6 6 10 0s6-6 8 0" fill="none" stroke="#C8452A" stroke-width="2.4" stroke-linecap="round"/><path d="M3 9c4-6 6 6 10 0s6-6 8 0" fill="none" stroke="#E4A02B" stroke-width="2.4" stroke-linecap="round"/></svg>
-        Yoriyoi パートナー
+        Yoriyoi 代表
       </span>
-      <h1>山田 よりよ</h1>
-      <p class="role">フリーランス編集者<span class="en">/</span>コミュニティ運営</p>
+      <h1>ゆうぎり</h1>
+      <p class="role">VTuber<span class="en">/</span>作家・講演家</p>
       <p class="tagline">人とプロジェクトの接点を、よりよい出会いへ。</p>
     </section>
-
-    <!-- 縒り divider -->
-    <svg class="twist" viewBox="0 0 460 16" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0 8 C 70 0, 120 16, 190 8 S 320 0, 460 8" fill="none" stroke="#C8452A" stroke-width="2" stroke-linecap="round"/>
-      <path d="M0 8 C 70 16, 120 0, 190 8 S 320 16, 460 8" fill="none" stroke="#E4A02B" stroke-width="2" stroke-linecap="round"/>
-    </svg>
 
     <!-- Links (flat / 見出しなし) -->
     <section class="section">
       <div class="links">
         <a class="link link--primary" href="#">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#C8452A" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15c4-7 6 7 10 0s6-7 6 0" transform="translate(0 1)"/><path d="M4 9c4-7 6 7 10 0s6-7 6 0" transform="translate(0 -1)"/></svg></span>
+          <span class="ico"><img class="mark" src="../assets/logo/yoriyoi_mark.svg" alt="" /></span>
           <span class="label">Yoriyoiとは</span>
           <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></span>
         </a>

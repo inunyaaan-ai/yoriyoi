@@ -3,3 +3,9 @@
 
 # Claude Code のローカル設定（各自の環境依存なので共有しない）
 .claude/
+
+# 重い元データ（サイトでは未使用・ローカル保管）。使用中の shippou_tile.jpg のみ追跡する
+assets/patterns/*.jpg
+!assets/patterns/shippou_tile.jpg
+assets/logo/yoriyoi_fab.svg
+assets/logo/yoriyoi_fab-*.png
