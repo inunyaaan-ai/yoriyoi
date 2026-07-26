@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WF ①コーポレートサイト｜Yoriyoi</title>
+<link rel="stylesheet" href="wf.css" />
+</head>
+<body>
+<div class="page">
+
+  <div class="doc-head">
+    <h1>① コーポレートサイト ワイヤーフレーム v0.2</h1>
+    <p>株式会社Yoriyoi のコーポレートサイト。構造・情報設計・導線の確定用（ビジュアル/カラー/フォントは未反映）。</p>
+  </div>
+
+  <nav class="wfnav">
+    <a href="index.html">← 目次</a>
+    <a href="corporate.html" class="current">① コーポレートサイト</a>
+    <a href="card-hub.html">② 名刺 → 名刺ハブ</a>
+  </nav>
+
+  <div class="legend">
+    <span><i class="sw g"></i>テキスト/コンテンツ枠</span>
+    <span><i class="sw i"></i>画像/メディア</span>
+    <span><i class="sw b"></i>注釈（設計意図）</span>
+    <span>💡 曲線ライン＝「人が編む」モチーフの差し込み位置（後で本デザイン化）</span>
+  </div>
+
+  <!-- ============================================================
+       ① コーポレートサイト
+       ============================================================ -->
+  <div class="frame-title">
+    <span class="tag">01</span>
+    <h2>コーポレートサイト｜株式会社Yoriyoi</h2>
+  </div>
+  <p class="frame-desc">骨子は message.txt（Mission / Vision / About / 実績 / 事業 / Approach / VEN / Looking for / Contact）。1カラム縦積み＝モバイル基準の情報順。PCではカード類を2〜3カラム展開。</p>
+
+  <div class="wf device">
+
+    <!-- global nav -->
+    <div class="nav">
+      <div class="logo-slot"></div>
+      <div class="nav-links"><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="burger"></div>
+    </div>
+    <div class="sec" style="padding-top:10px;padding-bottom:10px;">
+      <div class="note"><b>Nav:</b> ロゴ ／ 事業(What We Do)・私たちについて・実績・VEN・採用(Looking for)・Contact ／ 右端に主CTA「相談する」。モバイルはハンバーガー。</div>
+    </div>
+
+    <!-- HERO -->
+    <div class="sec">
+      <span class="pin">1</span>
+      <p class="kicker">Hero</p>
+      <div class="h xl"></div>
+      <div class="h lg" style="margin-bottom:16px;"></div>
+      <div class="txt w70"></div>
+      <div class="txt w50"></div>
+      <div><span class="btn solid">相談する</span><span class="btn">事業を見る</span></div>
+      <div class="curve" aria-hidden="true"><svg viewBox="0 0 900 14" preserveAspectRatio="none"><path d="M0 7 C150 -4 300 18 450 7 S750 -4 900 7" fill="none" stroke="#cfcfcf" stroke-width="2"/></svg></div>
+      <div class="note"><b>コピー:</b> 「人生と社会の選択肢を増やす会社」＋「一緒につくる人がいると、世界はもっと面白くなる。」＋1文の会社説明。<br><b>💡</b> ヒーロー下端に曲線ライン（AI=直線／人=曲線の世界観の最初の一撃）。</div>
+    </div>
+
+    <!-- 01 Mission -->
+    <div class="sec">
+      <span class="pin">2</span>
+      <p class="kicker">01 Mission</p>
+      <div class="h md"></div>
+      <div class="txt w90"></div><div class="txt w80"></div><div class="txt w60"></div>
+      <div class="note"><b>Mission:</b> AIと「越境する力」で、企業に新しい事業成果を生み出す。</div>
+    </div>
+
+    <!-- 02 Vision -->
+    <div class="sec">
+      <span class="pin">3</span>
+      <p class="kicker">02 Vision</p>
+      <div class="h md"></div>
+      <div class="txt w90"></div><div class="txt w70"></div>
+      <div class="note"><b>Vision:</b> 人生と社会の選択肢を増やす。／位置づけ＝<b>ウェルビーイングの一環</b>（AI押しつけへのカウンターではない）。</div>
+    </div>
+
+    <!-- 03 About -->
+    <div class="sec">
+      <span class="pin">4</span>
+      <p class="kicker">03 About｜私たちについて</p>
+      <div class="row">
+        <div style="flex:1;">
+          <div class="h md"></div>
+          <div class="txt w90"></div><div class="txt w90"></div><div class="txt w70"></div>
+        </div>
+        <div class="img" style="width:150px;min-height:110px;flex:none;">image</div>
+      </div>
+      <div class="note">中核＝AI社会実装支援事業。業務分析→活用設計→導入→人材育成→運用改善の一貫支援を1文で。</div>
+    </div>
+
+    <!-- 05 What We Do (事業) -->
+    <div class="sec">
+      <span class="pin">5</span>
+      <p class="kicker">05 What We Do｜事業</p>
+      <div class="h sm" style="margin-bottom:14px;"></div>
+      <div class="grid3">
+        <div class="card"><div class="chip" style="margin-bottom:10px;"></div><div class="txt w80"></div><div class="txt w60"></div></div>
+        <div class="card"><div class="chip" style="margin-bottom:10px;"></div><div class="txt w80"></div><div class="txt w60"></div></div>
+        <div class="card"><div class="chip" style="margin-bottom:10px;"></div><div class="txt w80"></div><div class="txt w60"></div></div>
+        <div class="card"><div class="chip" style="margin-bottom:10px;"></div><div class="txt w80"></div><div class="txt w60"></div></div>
+        <div class="card"><div class="chip" style="margin-bottom:10px;"></div><div class="txt w80"></div><div class="txt w60"></div></div>
+      </div>
+      <div class="note">5事業カード：<b>AI・DX社会実装支援 / 社外AI推進室 / 講演・研修・リスキリング / 共創プロジェクト / VEN構築</b>。各カード→詳細へ。</div>
+    </div>
+
+    <!-- 06 Approach -->
+    <div class="sec">
+      <span class="pin">6</span>
+      <p class="kicker">06 Our Approach｜大切にすること</p>
+      <div class="grid2">
+        <div class="card"><div class="txt w70"></div><div class="txt w90"></div></div>
+        <div class="card"><div class="txt w70"></div><div class="txt w90"></div></div>
+        <div class="card"><div class="txt w70"></div><div class="txt w90"></div></div>
+        <div class="card"><div class="txt w70"></div><div class="txt w90"></div></div>
+        <div class="card"><div class="txt w70"></div><div class="txt w90"></div></div>
+        <div class="card"><div class="txt w70"></div><div class="txt w90"></div></div>
+      </div>
+      <div class="note">6項目（導入でなく成果まで／境界を越える／専門性をチームに／一緒につくる／続く仕組み／専門性が活きる機会）。</div>
+    </div>
+
+    <!-- 04 What We've Done (実績) -->
+    <div class="sec">
+      <span class="pin">7</span>
+      <p class="kicker">04 What We’ve Done｜実績・信頼</p>
+      <div class="grid3">
+        <div class="card" style="text-align:center;"><div class="h sm" style="width:60%;margin:0 auto 8px;"></div><div class="txt w80" style="margin:0 auto;"></div></div>
+        <div class="card" style="text-align:center;"><div class="h sm" style="width:60%;margin:0 auto 8px;"></div><div class="txt w80" style="margin:0 auto;"></div></div>
+        <div class="card" style="text-align:center;"><div class="h sm" style="width:60%;margin:0 auto 8px;"></div><div class="txt w80" style="margin:0 auto;"></div></div>
+      </div>
+      <div class="note">数字で信頼を作る：YouTube登録20万規模／Podcast日本1位／書籍・講演 等。<b>誇張回避のトーンで扱う</b>（ログのブランド注記）。</div>
+    </div>
+
+    <!-- 07 Future VEN -->
+    <div class="sec">
+      <span class="pin">8</span>
+      <p class="kicker">07 Future｜Virtual Expert Network</p>
+      <div class="h md"></div>
+      <div class="flow">
+        <div class="step">企業・地域が抱える課題</div><div class="arrow">↓</div>
+        <div class="step">Yoriyoiが課題と目的を整理</div><div class="arrow">↓</div>
+        <div class="step">必要な専門家をVENから編成</div><div class="arrow">↓</div>
+        <div class="step">共創プロジェクトとして実行</div><div class="arrow">↓</div>
+        <div class="step">新しい事業成果と選択肢が生まれる</div>
+      </div>
+      <div class="note"><b>💡</b> VENの流れ図こそ「曲線で編む」表現の主役候補。将来ビジョンなので現在事業と視覚的に区別。</div>
+    </div>
+
+    <!-- 08 Looking for -->
+    <div class="sec">
+      <span class="pin">9</span>
+      <p class="kicker">08 Looking for｜こんな人と出会いたい</p>
+      <div class="txt w90"></div><div class="txt w80"></div>
+      <div><span class="btn">Expertとして参加する</span><span class="btn ghost">→ 募集ページへ（②と接続）</span></div>
+      <div class="note">企業側だけでなく<b>VEN Expert志望</b>への入口。詳細は別ページ（実働チーム・クリエイター募集）へ送客。</div>
+    </div>
+
+    <!-- 09 Contact -->
+    <div class="sec">
+      <span class="pin">10</span>
+      <p class="kicker">09 Contact｜一緒につくりませんか？</p>
+      <div class="h md" style="margin:0 auto 14px;"></div>
+      <div class="txt w70"></div>
+      <div><span class="btn solid">お問い合わせ</span></div>
+      <div class="note">「まだ計画になっていないアイデア段階でもOK」の一言で心理的ハードルを下げる。窓口：info@yoriyoi-inc.co.jp。</div>
+    </div>
+
+    <!-- footer -->
+    <div class="sec" style="background:#fafafa;">
+      <div class="row" style="justify-content:space-between;align-items:flex-start;">
+        <div class="logo-slot" style="width:100px;"></div>
+        <div style="display:flex;gap:26px;">
+          <div><div class="txt w80" style="width:60px;"></div><div class="txt" style="width:50px;"></div><div class="txt" style="width:50px;"></div></div>
+          <div><div class="txt w80" style="width:60px;"></div><div class="txt" style="width:50px;"></div><div class="txt" style="width:50px;"></div></div>
+        </div>
+      </div>
+      <div class="note">会社概要／各事業／プライバシー／SNS。会社名・所在地・代表（CEO=本名表記の扱いに注意）。</div>
+    </div>
+
+  </div>
+
+
+</div>
+</body>
+</html>

@@ -1,31 +1,89 @@
-# Yoriyoi 名刺ハブサイト
+# 株式会社Yoriyoi — ブランド & Web
 
-株式会社Yoriyoi の名刺ハブサイト（名刺のQR等から、その人の活動・発信・連絡先へつなぐ簡易サイト）のソースです。
+**人生と社会の選択肢を増やす会社。**
+一緒につくる人がいると、世界はもっと面白くなる。
 
-## 構成
+株式会社Yoriyoi のブランド資料と Web 制作物のリポジトリです。
+コーポレートサイト、名刺ハブサイト、物理名刺、それらの設計プロセス（HCD）をまとめて管理しています。
+
+---
+
+## 📁 構成
 
 ```
 .
+├── brand/                      ブランドの一次資料
+│   ├── message.md              ★会社の Mission / Vision / 事業 / VEN（最優先の一次資料）
+│   └── design-system.md        ブランドデザインシステム v0.2（思想・トーン・実装トークン）
+│
+├── hcd/
+│   └── hcd-process.md          HCD進行ドキュメント（利用状況→要求→設計→評価）
+│
+├── wireframes/                 ワイヤーフレーム v0.2（構造・情報設計の確定用）
+│   ├── index.html              目次
+│   ├── corporate.html          ① コーポレートサイト
+│   ├── card-hub.html           ② 名刺 → 名刺ハブサイト
+│   └── wf.css                  共通スタイル
+│
 ├── hub-site/
-│   └── index.html          # ハブサイト本体（HTML/CSS 一枚完結）
+│   └── index.html              名刺ハブサイト 実装（HTML/CSS 一枚完結）
+│
 ├── assets/
-│   └── logo/
-│       └── yoriyoi_logo.svg
-└── yoriyoi_brand_design_system.md   # ブランドデザインガイド
+│   ├── logo/                   ロゴ各種（svg / png）
+│   └── patterns/               地紋素材（七宝ほか）
+│
+└── logs/                       意思決定の経緯（Discord 要約）
+    ├── 2026-07-25_discord.md   方向転換・インフラ整備
+    └── 2026-07-26_discord.md   実リンクデータ・AUTOMATA実証
 ```
 
-## ローカルでの確認方法
+---
 
-特別なビルドは不要です。`hub-site/index.html` をブラウザで開けば表示されます。
-ロゴを含めて正しく表示するには、リポジトリのフォルダ構成を保ったまま開いてください
-（`index.html` は `../assets/logo/yoriyoi_logo.svg` を参照しています）。
+## 🧭 どこから読む？
 
-## 編集への参加（みんなでいじる）
+| 知りたいこと | 見るファイル |
+|---|---|
+| 会社が何をする会社か | [`brand/message.md`](brand/message.md) |
+| 色・書体・余白などの実装ルール | [`brand/design-system.md`](brand/design-system.md) Part II（§24〜26） |
+| なぜこの設計にしたのか | [`hcd/hcd-process.md`](hcd/hcd-process.md) |
+| 画面の構造・情報の並び | [`wireframes/index.html`](wireframes/index.html) |
+| 決定の経緯・背景 | [`logs/`](logs/) |
+
+> ⚠️ **2026-07-25 に事業の方向転換がありました。**
+> `brand/design-system.md` の Part I には転換前の記述（AIマッチング前提）が一部残っています。
+> 内容が食い違う場合は **`brand/message.md` を優先**してください。詳細は design-system.md 冒頭の有効範囲表を参照。
+
+---
+
+## 🖥 ローカルでの確認方法
+
+ビルド不要です。HTML をブラウザで開くだけで表示されます。
+
+```bash
+open hub-site/index.html
+```
+
+```bash
+open wireframes/index.html
+```
+
+ロゴや地紋を正しく表示するため、**リポジトリのフォルダ構成を保ったまま**開いてください
+（`hub-site/index.html` は `../assets/` を相対参照しています）。
+
+---
+
+## 🤝 編集への参加
 
 - 気軽に Fork → 修正 → Pull Request で提案してください。
-- デザインの方針は `yoriyoi_brand_design_system.md` に準拠します。
+- デザインの方針は [`brand/design-system.md`](brand/design-system.md) に準拠します。
+- 新しい画面や機能を作るときは、design-system.md §21「Design System Decision Checklist」で確認を。
 
-## ブランド
+---
 
-- 社名: 株式会社Yoriyoi（よりよい）— 人生の選択肢を増やす会社
-- 「より良い」＋「縒り合わせる」から命名
+## 🏢 ブランド
+
+- **社名**：株式会社Yoriyoi（よりよい）
+- **由来**：「より良い」＋糸を撚り合わせる「縒る」＋人が集まる「寄り合い」
+- **中核事業**：AI社会実装支援（AI・DX導入から人材育成・自走化まで伴走）
+- **将来構想**：Virtual Expert Network（VEN）— 専門家がプロジェクト単位でつながるネットワーク
+- **ドメイン**：`yoriyoi-inc.co.jp`
