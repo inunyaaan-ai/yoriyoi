@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Yoriyoi — フォント候補（1画面比較）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600;700&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+2:wght@400;500;700;800&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Murecho:wght@400;500;700;800&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&display=swap" />
+<style>
+  :root{--ink:#F7F3EC;--soft:#B4ACA1;--grad:linear-gradient(100deg,#E4572E,#E4A02B);}
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{margin:0;background:#131009;color:var(--ink);-webkit-font-smoothing:antialiased;
+    font-family:"Noto Sans JP",sans-serif;position:relative;overflow:hidden;
+    padding:26px 30px 30px;display:flex;flex-direction:column;}
+  .glow{position:fixed;border-radius:50%;filter:blur(90px);z-index:0;mix-blend-mode:screen;pointer-events:none;}
+  .g1{width:480px;height:480px;background:#D8431F;top:-160px;left:-120px;opacity:0.45;}
+  .g2{width:440px;height:440px;background:#E4A02B;bottom:-170px;right:-130px;opacity:0.3;}
+  .head{position:relative;z-index:1;display:flex;align-items:baseline;gap:14px;margin:2px 2px 12px;flex-wrap:wrap;}
+  .head h1{font-size:16px;font-weight:800;margin:0;}
+  .head p{font-size:11.5px;color:var(--soft);margin:0;}
+  .grid{position:relative;z-index:1;flex:1;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:22px;min-height:0;}
+  @media(max-width:820px){.grid{grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,1fr);}}
+  .card{border-radius:16px;border:1px solid rgba(255,240,228,0.14);background:rgba(22,18,14,0.34);
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.13),0 16px 34px rgba(0,0,0,0.38);
+    padding:30px 32px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;min-height:0;}
+  .top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:22px;}
+  .fname{font-size:12.5px;font-weight:800;font-family:"Noto Sans JP";}
+  .tag{font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap;font-family:"Noto Sans JP";}
+  .t-top{background:var(--grad);color:#1a1206;}
+  .t-ok{background:rgba(255,240,228,0.12);color:var(--soft);}
+  .wm{display:none;}
+  .disp{font-size:25px;font-weight:800;letter-spacing:var(--ls,-0.01em);line-height:1.45;margin:0 0 20px;}
+  .ls{font-size:9.5px;font-weight:700;color:#8f877c;font-family:"Noto Sans JP";margin-left:8px;}
+  .u{position:relative;white-space:nowrap;}
+  .u::after{content:"";position:absolute;left:0;right:0;bottom:1px;height:3px;border-radius:2px;background:var(--grad);}
+  .bd{font-size:12.5px;font-weight:400;line-height:1.95;color:#D8D0C5;margin:0 0 20px;}
+  .nums{font-size:17px;font-weight:800;letter-spacing:0.01em;}
+  .nums small{font-size:11px;font-weight:700;color:var(--soft);}
+</style>
+</head>
+<body>
+  <div class="glow g1"></div><div class="glow g2"></div>
+  <div class="head">
+    <h1>Yoriyoi フォント候補 — 1画面比較</h1>
+    <p>ダーク地・同一コピー。全面ゴシック方針。◎＝本命</p>
+  </div>
+  <div class="grid">
+
+    <div class="card" style="font-family:'Zen Kaku Gothic New',sans-serif;--ls:0.06em;">
+      <div class="top"><span class="fname">Zen Kaku Gothic New</span><span class="tag t-top">温かい知性 ◎</span></div>
+      <div class="wm">Yoriyoi</div>
+      <div class="disp">人の働きが、<span class="u">成果</span>になる。</div>
+      <div class="bd">現場に入り、先に成果を出す。だから自走できる。</div>
+      <div class="nums">20<small>万人</small> ・ 日本1<small>位</small><span class="ls">字間 +0.06em</span></div>
+    </div>
+
+    <div class="card" style="font-family:'IBM Plex Sans JP',sans-serif;--ls:0.05em;">
+      <div class="top"><span class="fname">IBM Plex Sans JP</span><span class="tag t-top">知的・実務 ◎</span></div>
+      <div class="wm">Yoriyoi</div>
+      <div class="disp">人の働きが、<span class="u">成果</span>になる。</div>
+      <div class="bd">現場に入り、先に成果を出す。だから自走できる。</div>
+      <div class="nums">20<small>万人</small> ・ 日本1<small>位</small><span class="ls">字間 +0.05em</span></div>
+    </div>
+
+    <div class="card" style="font-family:'Murecho',sans-serif;--ls:0.07em;">
+      <div class="top"><span class="fname">Murecho</span><span class="tag t-ok">柔+現代</span></div>
+      <div class="wm">Yoriyoi</div>
+      <div class="disp">人の働きが、<span class="u">成果</span>になる。</div>
+      <div class="bd">現場に入り、先に成果を出す。だから自走できる。</div>
+      <div class="nums">20<small>万人</small> ・ 日本1<small>位</small><span class="ls">字間 +0.07em</span></div>
+    </div>
+
+    <div class="card" style="font-family:'M PLUS 2',sans-serif;--ls:0.06em;">
+      <div class="top"><span class="fname">M PLUS 2</span><span class="tag t-ok">幾何・洗練</span></div>
+      <div class="wm">Yoriyoi</div>
+      <div class="disp">人の働きが、<span class="u">成果</span>になる。</div>
+      <div class="bd">現場に入り、先に成果を出す。だから自走できる。</div>
+      <div class="nums">20<small>万人</small> ・ 日本1<small>位</small><span class="ls">字間 +0.06em</span></div>
+    </div>
+
+    <div class="card" style="font-family:'Noto Sans JP',sans-serif;--ls:0.06em;">
+      <div class="top"><span class="fname">Noto Sans JP</span><span class="tag t-ok">中立・本文向</span></div>
+      <div class="wm">Yoriyoi</div>
+      <div class="disp">人の働きが、<span class="u">成果</span>になる。</div>
+      <div class="bd">現場に入り、先に成果を出す。だから自走できる。</div>
+      <div class="nums">20<small>万人</small> ・ 日本1<small>位</small><span class="ls">字間 +0.06em</span></div>
+    </div>
+
+    <div class="card" style="font-family:'BIZ UDPGothic',sans-serif;--ls:0.08em;">
+      <div class="top"><span class="fname">BIZ UDPGothic</span><span class="tag t-ok">UD・実務</span></div>
+      <div class="wm">Yoriyoi</div>
+      <div class="disp">人の働きが、<span class="u">成果</span>になる。</div>
+      <div class="bd">現場に入り、先に成果を出す。だから自走できる。</div>
+      <div class="nums">20<small>万人</small> ・ 日本1<small>位</small><span class="ls">字間 +0.08em</span></div>
+    </div>
+
+  </div>
+</body>
+</html>

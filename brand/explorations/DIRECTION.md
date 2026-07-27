@@ -15,8 +15,15 @@ Yoriyoiのビジュアル刷新の探索メモ。**まだ確定前**。design-sy
 - **プライマリボタン：** 黒地 `#0E0C0A` ×グラデ縁（mask合成）＋オレンジの外グロー ＝ “光る黒い鍵”。
 - **グロー：** `mix-blend-mode:screen` で朱赤・山吹・明橙を重ね、交差部が溶けた金橙（molten）に。可読性はradialスクリム＋見出しtext-shadowで担保。
 
+## フォント（探索中・2026-07-28）
+- 全面ゴシック方針。Google Fonts 和文6種を比較 → [`font-candidates.html`](font-candidates.html)（ダーク地・1画面）。
+- **本命2：Zen Kaku Gothic New（温かい知性）／ IBM Plex Sans JP（知的・実務・英数字が上質）**。本文は Noto Sans JP を"働きもの"に当てる案も。
+- **見出しの字間：人格（余白・急かさない）に合わせて開けめ**に確定方向。現状値 = Zen +0.06 / Plex +0.05 / Murecho +0.07 / M PLUS 2 +0.06 / Noto +0.06 / BIZ +0.08 em。→ design-system化する時は「見出し letter-spacing ≈ +0.06em」を基準に。
+- まだ1〜2書体に未確定。
+
 ## 現状ファイル
 - [`dark-glass-v2.html`](dark-glass-v2.html) ← **本命WIP（80点）**。ナビ/ヒーロー/伴走モデル3ステップ/事業タイル/実績を統合。
+- [`font-candidates.html`](font-candidates.html) — フォント6種比較（1画面・見出し字間チューニング済み）。
 - [`gradient-system.html`](gradient-system.html) — グラデの使う/使わない場所の定義。
 - [`ground-light-vs-dark.html`](ground-light-vs-dark.html) — 地の比較（ダーク採用の記録）。
 
