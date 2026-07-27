@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Yoriyoi — 朱赤→山吹 グラデ・システム</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" />
+<style>
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Noto Sans JP",system-ui,sans-serif;background:#e9e9e7;color:#2a2a2a;
+    -webkit-font-smoothing:antialiased;line-height:1.7;padding:26px 18px 70px;}
+  .wrap{max-width:1180px;margin:0 auto;}
+  h1{font-size:21px;font-weight:700;margin:0 0 4px;}
+  .sub{font-size:13px;color:#666;margin:0 0 18px;}
+  /* gradient tokens */
+  .def{background:#fff;border:1px solid #dedede;border-radius:12px;padding:14px 16px;margin-bottom:20px;font-size:12px;color:#555;}
+  .def code{font-family:ui-monospace,monospace;background:#f4f4f2;padding:1px 6px;border-radius:4px;}
+  .gradbar{height:26px;border-radius:6px;margin:8px 0 4px;background:linear-gradient(100deg,#C8452A 0%,#D8571F 42%,#E4A02B 100%);}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media(max-width:860px){.grid{grid-template-columns:1fr;}}
+  .panel{border-radius:16px;overflow:hidden;border:1px solid #d9d9d7;}
+  .cap{padding:11px 16px;background:#fff;border-bottom:1px solid #eee;font-size:13px;font-weight:700;}
+  .stage{padding:30px 28px;}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:0.16em;margin:0 0 12px;}
+  .big{font-size:34px;font-weight:800;letter-spacing:-0.02em;line-height:1.2;margin:0 0 6px;}
+  .gtext{background:linear-gradient(100deg,#C8452A,#D8571F 45%,#E4A02B);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .desc{font-size:13.5px;margin:14px 0 18px;max-width:32ch;}
+  .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .btn-grad{font-size:13px;font-weight:700;color:#fff;border:none;border-radius:999px;padding:11px 24px;
+    background:linear-gradient(100deg,#C8452A,#E4572E 40%,#E4A02B);cursor:default;box-shadow:0 6px 18px rgba(200,69,42,.28);}
+  .btn2{font-size:13px;font-weight:600;border-radius:999px;padding:10px 20px;background:transparent;}
+  /* meter */
+  .meter-l{font-size:11px;margin:22px 0 6px;}
+  .meter{height:12px;border-radius:999px;overflow:hidden;}
+  .meter i{display:block;height:100%;width:72%;border-radius:999px;background:linear-gradient(100deg,#C8452A,#E4572E 45%,#E4A02B);}
+  /* twist gradient line */
+  .twist{display:block;width:100%;height:22px;margin-top:24px;}
+  /* dark specifics via .dark scope */
+  .dark{background:#1B1917;color:#F5F1EA;}
+  .light{background:#FCFCFB;color:#1D1B19;}
+  .foot{font-size:11.5px;padding:11px 16px;background:#fff;color:#777;}
+  /* do/dont */
+  .dd{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px;}
+  @media(max-width:680px){.dd{grid-template-columns:1fr;}}
+  .dd .c{border-radius:12px;padding:16px 18px;font-size:13px;}
+  .dd .do{background:#eef3ee;border:1px solid #cfe0cf;}
+  .dd .dont{background:#f7ece9;border:1px solid #e6cdc6;}
+  .dd h4{margin:0 0 10px;font-size:14px;}
+  .dd .do h4{color:#3E6B4E;} .dd .dont h4{color:#A63A22;}
+  .dd ul{margin:0;padding-left:18px;line-height:1.9;}
+  .badbox{margin-top:10px;border-radius:8px;padding:10px 12px;font-size:12px;font-weight:600;
+    background:linear-gradient(100deg,#C8452A,#E4A02B);color:#fff;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>朱赤 → 山吹　グラデ・システム</h1>
+  <p class="sub">「2本の糸が縒り合い、人の働き（赤）が成果（山吹）になる」を色で表す。署名要素に限定して使う。</p>
+
+  <div class="def">
+    <b>コア・グラデ：</b> <code>linear-gradient(100deg, #C8452A 0%, #D8571F 42%, #E4A02B 100%)</code>
+    ／ 中間にオレンジ(#D8571F)を挟み、赤→黄が濁らず鮮やかに繋がる。角度は約100°（左下→右上の“伸び”）。
+    <div class="gradbar"></div>
+  </div>
+
+  <div class="grid">
+    <!-- DARK -->
+    <div class="panel">
+      <div class="cap">ダーク地 × グラデ（最も映える）</div>
+      <div class="stage dark">
+        <p class="eyebrow" style="color:#E4A02B;">AI社会実装支援</p>
+        <div class="big">人の働きが、<span class="gtext" style="background:linear-gradient(100deg,#E4572E,#E4A02B);-webkit-background-clip:text;background-clip:text;color:transparent;">成果</span>になる。</div>
+        <p class="desc" style="color:#C9C2B9;">現場に入り、先に成果を出す。だから、AIを覚える気持ちの余裕が生まれる。</p>
+        <div class="row">
+          <button class="btn-grad" style="background:linear-gradient(100deg,#E4572E,#E4A02B);">相談する</button>
+          <button class="btn2" style="color:#F5F1EA;border:1.5px solid #4a443d;">事業を見る</button>
+        </div>
+        <div class="meter-l" style="color:#A7A099;">現場の負担 → 自走まで</div>
+        <div class="meter" style="background:#38332E;"><i style="background:linear-gradient(100deg,#E4572E,#E4A02B);"></i></div>
+        <svg class="twist" viewBox="0 0 500 22" preserveAspectRatio="none" aria-hidden="true">
+          <defs><linearGradient id="gd" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#E4572E"/><stop offset="1" stop-color="#E4A02B"/></linearGradient></defs>
+          <path d="M0 11 C90 -2 150 24 240 11 S400 -2 500 11" fill="none" stroke="url(#gd)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M0 11 C90 24 150 -2 240 11 S400 24 500 11" fill="none" stroke="url(#gd)" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+        </svg>
+      </div>
+      <div class="foot">グラデ＝見出しの1語・CTA・縒り線・メーターに限定。地と本文は無彩＋オフホワイトで可読性を確保。</div>
+    </div>
+
+    <!-- LIGHT -->
+    <div class="panel">
+      <div class="cap">クリスプ・ライト地 × グラデ</div>
+      <div class="stage light">
+        <p class="eyebrow" style="color:#C8452A;">AI社会実装支援</p>
+        <div class="big" style="color:#1D1B19;">人の働きが、<span class="gtext">成果</span>になる。</div>
+        <p class="desc" style="color:#3a3733;">現場に入り、先に成果を出す。だから、AIを覚える気持ちの余裕が生まれる。</p>
+        <div class="row">
+          <button class="btn-grad">相談する</button>
+          <button class="btn2" style="color:#1D1B19;border:1.5px solid #d8d8d4;">事業を見る</button>
+        </div>
+        <div class="meter-l" style="color:#6E6A65;">現場の負担 → 自走まで</div>
+        <div class="meter" style="background:#EDEDEA;"><i></i></div>
+        <svg class="twist" viewBox="0 0 500 22" preserveAspectRatio="none" aria-hidden="true">
+          <defs><linearGradient id="gl" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#C8452A"/><stop offset="0.45" stop-color="#D8571F"/><stop offset="1" stop-color="#E4A02B"/></linearGradient></defs>
+          <path d="M0 11 C90 -2 150 24 240 11 S400 -2 500 11" fill="none" stroke="url(#gl)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M0 11 C90 24 150 -2 240 11 S400 24 500 11" fill="none" stroke="url(#gl)" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+        </svg>
+      </div>
+      <div class="foot">ライトでは差し色として引き締まる。グラデは同じ4箇所（見出し語・CTA・縒り線・メーター）に限定。</div>
+    </div>
+  </div>
+
+  <!-- do / dont -->
+  <div class="dd">
+    <div class="c do">
+      <h4>◎ グラデを使う場所（署名要素）</h4>
+      <ul>
+        <li><b>縒り線／区切り</b>（赤→山吹＝2本の糸が流れる）</li>
+        <li><b>見出しの“キーワード1語”</b>だけ（大きく・太く）</li>
+        <li><b>プライマリCTA</b>（重要アクション）</li>
+        <li><b>成果メーター／プロセス図</b>（人→成果の変化）</li>
+        <li>アイコンのリング等、小さな要点</li>
+      </ul>
+    </div>
+    <div class="c dont">
+      <h4>△ 使わない（過剰グラデ回避・a11y）</h4>
+      <ul>
+        <li><b>本文の背景</b>にグラデを敷く</li>
+        <li><b>小さい文字／長文</b>をグラデ文字にする</li>
+        <li>全面グラデ・複数グラデの多用（自己啓発化）</li>
+        <li>山吹側に文字を重ねる（コントラスト不足）</li>
+      </ul>
+      <div class="badbox">← これはNG例：本文をグラデ地に置くと山吹側で文字が読めない</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

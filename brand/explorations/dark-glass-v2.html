@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Yoriyoi — Dark × Glass v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" />
+<style>
+  :root{
+    --ink:#F7F3EC; --soft:#BCB4A9;
+    --grad:linear-gradient(100deg,#E4572E 0%,#E4A02B 100%);
+    --grad3:linear-gradient(100deg,#C8452A 0%,#E4572E 42%,#E4A02B 100%);
+    /* airy glass */
+    --glass:rgba(24,20,16,0.30);
+    --glass-edge:1px solid rgba(255,240,228,0.16);
+    --glass-hi:inset 0 1px 0 rgba(255,255,255,0.16);
+    --glass-shadow:0 24px 50px rgba(0,0,0,0.42);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Noto Sans JP",system-ui,sans-serif;background:#120F0A;color:var(--ink);
+    -webkit-font-smoothing:antialiased;line-height:1.75;position:relative;overflow-x:hidden;}
+
+  /* ==== richer, brighter warm glows behind glass ==== */
+  .glow{position:fixed;border-radius:50%;filter:blur(80px);z-index:0;pointer-events:none;mix-blend-mode:screen;}
+  .g1{width:560px;height:560px;background:#D8431F;top:-140px;left:-90px;opacity:0.72;}
+  .g2{width:520px;height:520px;background:#E4A02B;top:220px;right:-120px;opacity:0.58;}
+  .g3{width:480px;height:480px;background:#FF6A2C;top:60px;left:34%;opacity:0.5;}
+  .g4{width:440px;height:440px;background:#E4A02B;bottom:-160px;left:20%;opacity:0.4;}
+  .g5{width:360px;height:360px;background:#C8452A;bottom:120px;right:8%;opacity:0.42;}
+  /* subtle scrim so text stays readable over bright glows */
+  .scrim{position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(120% 90% at 50% 30%, rgba(18,15,10,0) 0%, rgba(18,15,10,0.35) 70%, rgba(18,15,10,0.6) 100%);}
+
+  .page{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:0 22px 70px;}
+
+  /* frosted nav (a touch denser for small text) */
+  nav{position:sticky;top:14px;z-index:5;margin-top:14px;display:flex;align-items:center;justify-content:space-between;
+    padding:12px 18px;border-radius:18px;border:var(--glass-edge);
+    background:rgba(20,16,12,0.42);backdrop-filter:blur(20px) saturate(1.2);-webkit-backdrop-filter:blur(20px) saturate(1.2);
+    box-shadow:var(--glass-hi),0 12px 30px rgba(0,0,0,0.35);}
+  .logo{font-size:16px;font-weight:800;letter-spacing:0.06em;color:var(--ink);}
+  .nav-links{display:flex;gap:20px;font-size:13px;color:var(--soft);}
+  @media(max-width:640px){.nav-links{display:none;}}
+
+  /* ==== primary button: black × gradient edge ==== */
+  .btn{position:relative;font-size:14px;font-weight:700;color:#fff;background:#0E0C0A;border:none;
+    border-radius:999px;padding:14px 28px;cursor:default;
+    box-shadow:0 10px 34px rgba(228,87,46,0.34);}
+  .btn::before{content:"";position:absolute;inset:0;border-radius:999px;padding:1.6px;background:var(--grad3);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;}
+  .btn.sm{font-size:12.5px;padding:10px 18px;}
+  .btn-glass{font-size:14px;font-weight:600;color:var(--ink);border:var(--glass-edge);border-radius:999px;padding:13px 24px;
+    background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);cursor:default;box-shadow:var(--glass-hi);}
+
+  /* hero */
+  .hero{padding:66px 6px 30px;}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:0.16em;color:#F0B24A;margin:0 0 16px;text-shadow:0 1px 16px rgba(0,0,0,.4);}
+  h1{font-size:48px;font-weight:800;letter-spacing:-0.02em;line-height:1.16;margin:0 0 18px;text-shadow:0 2px 30px rgba(0,0,0,.45);}
+  h1 .u{position:relative;white-space:nowrap;}
+  h1 .u::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:5px;border-radius:3px;background:var(--grad);}
+  .lead{font-size:16px;color:#E0D8CD;max-width:36ch;margin:0 0 28px;text-shadow:0 1px 18px rgba(0,0,0,.4);}
+  .row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+
+  .twist{display:block;width:100%;height:26px;margin:44px 0;}
+
+  .kicker{font-size:12px;font-weight:700;letter-spacing:0.14em;color:#F0B24A;margin:0 0 14px;}
+  h2{font-size:27px;font-weight:800;letter-spacing:-0.01em;margin:0 0 22px;text-shadow:0 2px 24px rgba(0,0,0,.4);}
+
+  /* ==== premium glass card recipe (no cheap thin border) ==== */
+  .glass{background:var(--glass);backdrop-filter:blur(22px) saturate(1.15);-webkit-backdrop-filter:blur(22px) saturate(1.15);
+    border:var(--glass-edge);border-radius:22px;box-shadow:var(--glass-hi),var(--glass-shadow);}
+
+  .steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+  @media(max-width:720px){.steps{grid-template-columns:1fr;}}
+  .step{padding:24px 22px;}
+  .step .no{font-size:22px;font-weight:800;color:#F0B24A;}
+  .step h3{font-size:18px;font-weight:700;margin:8px 0 6px;}
+  .step p{font-size:13px;color:var(--soft);margin:0;}
+
+  .tiles{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+  @media(max-width:720px){.tiles{grid-template-columns:1fr;}}
+  .tile{padding:22px;}
+  .tile .dot{width:36px;height:36px;border-radius:11px;margin-bottom:14px;
+    background:radial-gradient(circle at 30% 30%, #FF7A3C, #C8452A);box-shadow:0 6px 18px rgba(200,69,42,.4);}
+  .tile h4{font-size:15px;font-weight:700;margin:0 0 6px;}
+  .tile p{font-size:12.5px;color:var(--soft);margin:0;}
+
+  .metrics{display:flex;gap:16px;flex-wrap:wrap;margin-top:26px;}
+  .mchip{flex:1;min-width:150px;padding:18px 20px;}
+  .mchip .n{font-size:28px;font-weight:800;letter-spacing:-0.01em;color:var(--ink);}
+  .mchip .n small{font-size:14px;font-weight:700;color:var(--soft);}
+  .mchip .l{font-size:11px;color:var(--soft);margin-top:2px;}
+
+  .note{font-size:11.5px;color:#8f867c;margin-top:44px;border-top:1px solid rgba(255,240,228,0.12);padding-top:16px;}
+</style>
+</head>
+<body>
+  <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div><div class="glow g4"></div><div class="glow g5"></div>
+  <div class="scrim"></div>
+
+  <div class="page">
+
+    <nav>
+      <div class="logo">Yoriyoi</div>
+      <div class="nav-links"><span>事業</span><span>私たち</span><span>実績</span><span>VEN</span></div>
+      <button class="btn sm">相談する</button>
+    </nav>
+
+    <div class="hero">
+      <p class="eyebrow">AI社会実装支援</p>
+      <h1>人の働きが、<br><span class="u">成果</span>になる。</h1>
+      <p class="lead">いきなり「AIを使え」では、現場は動けない。まず私たちが入り、先に成果を出してから、無理なく自走へ導きます。</p>
+      <div class="row">
+        <button class="btn">相談する</button>
+        <button class="btn-glass">伴走モデルを見る</button>
+      </div>
+    </div>
+
+    <svg class="twist" viewBox="0 0 900 26" preserveAspectRatio="none" aria-hidden="true">
+      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#E4572E"/><stop offset="1" stop-color="#E4A02B"/></linearGradient></defs>
+      <path d="M0 13 C150 -4 250 30 420 13 S720 -4 900 13" fill="none" stroke="url(#g)" stroke-width="3" stroke-linecap="round"/>
+      <path d="M0 13 C150 30 250 -4 420 13 S720 30 900 13" fill="none" stroke="url(#g)" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+    </svg>
+
+    <p class="kicker">伴走モデル</p>
+    <h2>成果を先に。そして、自走へ。</h2>
+    <div class="steps">
+      <div class="step glass"><div class="no">01</div><h3>現場に入る</h3><p>AIが得意なチームで入り、先に成果を出す。</p></div>
+      <div class="step glass"><div class="no">02</div><h3>やり方をひらく</h3><p>楽になった実感の上で、教育を始める。</p></div>
+      <div class="step glass"><div class="no">03</div><h3>自走する</h3><p>チームに渡し、私たちの糸は静かに離れる。</p></div>
+    </div>
+
+    <p class="kicker" style="margin-top:48px;">事業</p>
+    <h2>境界を越えて、つなぐ。</h2>
+    <div class="tiles">
+      <div class="tile glass"><div class="dot"></div><h4>AI・DX社会実装支援</h4><p>業務分析から導入・運用改善まで一貫。</p></div>
+      <div class="tile glass"><div class="dot"></div><h4>社外AI推進室</h4><p>AIディレクター中心の専門家チームを編成。</p></div>
+      <div class="tile glass"><div class="dot"></div><h4>講演・研修・リスキリング</h4><p>現場でAIを活かせる人を育てる。</p></div>
+    </div>
+
+    <div class="metrics">
+      <div class="mchip glass"><div class="n">20<small>万人</small></div><div class="l">YouTube登録規模</div></div>
+      <div class="mchip glass"><div class="n">日本1<small>位</small></div><div class="l">Podcast デイリー</div></div>
+      <div class="mchip glass"><div class="n">3<small>冊</small></div><div class="l">書籍出版</div></div>
+    </div>
+
+    <p class="note">Dark × Glass v2 — グロー強化＋朱×山吹をリッチに透過／ガラスはエアリー（低ティント＋強ブラー）／エッジは上からの光ハイライト＋柔らかい影で上質化／グラデ文字は不使用。差し色は背景グロー・縒り線・CTAの縁・キーワード下線に限定。</p>
+
+  </div>
+</body>
+</html>

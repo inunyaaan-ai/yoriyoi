@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Yoriyoi トーン＆マナーシート v0.1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" />
+<style>
+  :root{
+    --red:#C8452A; --red-deep:#A63A22; --yellow:#E4A02B;
+    --bg:#FBF7F0; --surface:#F2EBDD; --surface-2:#EAE1D0; --border:#E0D7C7;
+    --text:#332E29; --text-soft:#6C6257; --white:#fff;
+    --maxw:1000px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Noto Sans JP",system-ui,sans-serif;background:var(--bg);color:var(--text);
+    line-height:1.75;-webkit-font-smoothing:antialiased;letter-spacing:0.01em;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px 80px;}
+  a{color:var(--red-deep);text-underline-offset:2px;}
+
+  /* header */
+  header{padding:56px 0 28px;border-bottom:2px solid var(--text);}
+  .eyebrow{font-size:12px;letter-spacing:0.18em;color:var(--text-soft);font-weight:600;margin:0 0 10px;}
+  h1{font-size:34px;font-weight:700;letter-spacing:-0.01em;margin:0 0 14px;line-height:1.25;}
+  .purpose{font-size:17px;max-width:36ch;margin:0;font-weight:500;}
+  .meta{margin-top:20px;font-size:12px;color:var(--text-soft);}
+  .meta b{color:var(--text);}
+
+  /* twist under header */
+  .twist{display:block;width:100%;height:18px;margin:18px 0 0;}
+
+  section{padding:44px 0 8px;border-bottom:1px solid var(--border);}
+  .sec-num{font-size:12px;letter-spacing:0.14em;color:var(--red);font-weight:700;}
+  h2{font-size:22px;font-weight:700;letter-spacing:-0.005em;margin:6px 0 4px;}
+  .lead{color:var(--text-soft);font-size:14px;margin:0 0 24px;}
+
+  /* two questions */
+  .qs{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:680px){.qs{grid-template-columns:1fr;}}
+  .q{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:20px 22px;}
+  .q .tag{font-size:11px;font-weight:700;letter-spacing:0.1em;color:var(--text-soft);}
+  .q h3{margin:6px 0 8px;font-size:18px;}
+  .q p{margin:0;font-size:14px;}
+  .q.this{border-color:var(--red);box-shadow:0 6px 20px rgba(200,69,42,0.10);}
+  .q.this .tag{color:var(--red);}
+
+  /* personality */
+  .persona{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px;}
+  @media(max-width:680px){.persona{grid-template-columns:1fr;}}
+  .persona .card{background:var(--surface);border-radius:14px;padding:18px 20px;}
+  .persona .card .n{font-size:11px;color:var(--red);font-weight:700;letter-spacing:0.08em;}
+  .persona .card h4{margin:6px 0 6px;font-size:16px;}
+  .persona .card p{margin:0;font-size:13px;color:var(--text-soft);}
+  .attrs{display:flex;flex-wrap:wrap;gap:8px;}
+  .attrs span{background:var(--white);border:1px solid var(--border);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:500;}
+
+  /* map */
+  .map-wrap{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:18px;overflow-x:auto;}
+  .map-wrap svg{display:block;width:100%;min-width:560px;height:auto;}
+  .map-note{font-size:12px;color:var(--text-soft);margin:14px 2px 0;}
+
+  /* keywords */
+  .kw{display:flex;flex-wrap:wrap;gap:10px;}
+  .kw span{font-size:15px;font-weight:600;background:var(--surface);border-radius:10px;padding:8px 16px;}
+  .kw span.accent{background:var(--red);color:#fff;}
+  .kw span.accent2{background:var(--yellow);color:#3a2c08;}
+
+  /* color scheme */
+  .colors{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;}
+  @media(max-width:760px){.colors{grid-template-columns:repeat(2,1fr);}}
+  .sw{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--white);}
+  .sw .chip{height:78px;}
+  .sw .info{padding:11px 13px;}
+  .sw .role{font-size:12px;font-weight:700;}
+  .sw .hex{font-size:11px;color:var(--text-soft);font-family:ui-monospace,monospace;margin-top:2px;}
+  .sw .use{font-size:11px;color:var(--text-soft);margin-top:6px;line-height:1.5;}
+  .subswatch{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;}
+  .subswatch .mini{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text-soft);}
+  .subswatch .box{width:20px;height:20px;border-radius:5px;border:1px solid var(--border);}
+  .callout{background:var(--surface);border-left:3px solid var(--red);border-radius:6px;padding:12px 15px;font-size:13px;margin-top:18px;}
+  .callout b{color:var(--red-deep);}
+
+  /* type */
+  .type-row{border:1px solid var(--border);border-radius:12px;background:var(--white);padding:16px 20px;margin-bottom:10px;display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;}
+  .type-row .spec{font-size:11px;color:var(--text-soft);font-family:ui-monospace,monospace;white-space:nowrap;min-width:150px;}
+  .t-display{font-size:32px;font-weight:700;letter-spacing:-0.01em;}
+  .t-h2{font-size:22px;font-weight:700;}
+  .t-h3{font-size:18px;font-weight:600;}
+  .t-body{font-size:15px;font-weight:400;line-height:1.9;}
+  .t-cap{font-size:12px;font-weight:400;color:var(--text-soft);}
+  .voice-note{font-size:13px;color:var(--text-soft);margin-top:6px;}
+
+  /* motif */
+  .motif{display:grid;grid-template-columns:1.3fr 1fr;gap:22px;align-items:center;}
+  @media(max-width:680px){.motif{grid-template-columns:1fr;}}
+  .motif ul{margin:0;padding:0;list-style:none;}
+  .motif li{padding:9px 0;border-bottom:1px dashed var(--border);font-size:14px;}
+  .motif li b{color:var(--red);}
+  .motif .fig{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:12px;}
+
+  /* mood board */
+  .mood{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:104px;gap:12px;}
+  @media(max-width:760px){.mood{grid-template-columns:repeat(2,1fr);}}
+  .tile{border-radius:12px;padding:14px;display:flex;flex-direction:column;justify-content:flex-end;font-size:13px;font-weight:600;color:#fff;}
+  .tile.span2{grid-column:span 2;}
+  .tile.rowspan2{grid-row:span 2;}
+  .tile .lab{font-size:11px;opacity:0.85;font-weight:500;}
+  .tile.img{background:repeating-linear-gradient(45deg,#e7ddca,#e7ddca 9px,#ded2ba 9px,#ded2ba 18px);color:var(--text-soft);border:1px solid var(--border);align-items:center;justify-content:center;text-align:center;}
+  .mood-note{font-size:12px;color:var(--text-soft);margin-top:14px;}
+
+  /* do/dont */
+  .dd{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:680px){.dd{grid-template-columns:1fr;}}
+  .dd .col{border-radius:14px;padding:18px 20px;}
+  .dd .do{background:#eef3ee;border:1px solid #cfe0cf;}
+  .dd .dont{background:#f7ece9;border:1px solid #e6cdc6;}
+  .dd h4{margin:0 0 12px;font-size:15px;}
+  .dd .do h4{color:#3E6B4E;} .dd .dont h4{color:var(--red-deep);}
+  .dd ul{margin:0;padding-left:18px;font-size:13.5px;line-height:1.85;}
+
+  .confirm{background:var(--surface-2);border-radius:12px;padding:16px 20px;margin-top:34px;font-size:13px;}
+  .confirm h4{margin:0 0 8px;font-size:14px;}
+  .confirm ol{margin:0;padding-left:20px;line-height:1.8;}
+  footer{margin-top:30px;font-size:12px;color:var(--text-soft);text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">YORIYOI — TONE &amp; MANNER SHEET</p>
+    <h1>やわらかい線で編まれた、<br>実務的で信頼できる。</h1>
+    <p class="purpose">株式会社Yoriyoi のトーン＆マナー。和の情緒でも、冷たいテック感でもない、その“あいだ”を狙う。</p>
+    <div class="meta">
+      v0.1 draft ／ 2026-07-28 ／ 基づく資料：<b>message.md</b>（事業）・<b>design-system.md</b>（色・書体）・<b>references.md</b>（競合）
+    </div>
+    <svg class="twist" viewBox="0 0 1000 18" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 9 C160 -2 260 20 420 9 S720 -2 1000 9" fill="none" stroke="#C8452A" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M0 9 C160 20 260 -2 420 9 S720 20 1000 9" fill="none" stroke="#E4A02B" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+  </header>
+
+  <!-- 0. 2つの問い -->
+  <section>
+    <span class="sec-num">00 — 前提</span>
+    <h2>2つの問いを分ける</h2>
+    <p class="lead">「なんのため」と「どんな」は別問題。このシートは後者（＝トンマナ）を、前者から導いて定義します。</p>
+    <div class="qs">
+      <div class="q">
+        <span class="tag">なんのため（目的）</span>
+        <h3>企業の“成果”をつくる会社だと伝える</h3>
+        <p>AI社会実装支援。現場に入って先に成果を出し、教育し、最後は自走に導く。人生と社会の選択肢を増やす。</p>
+      </div>
+      <div class="q this">
+        <span class="tag">どんな（このシートの範囲）</span>
+        <h3>温かい知性・編まれた線・急かさない</h3>
+        <p>実務的で信頼できるが、人の気配がある。AIの冷たさでなく、人が編む温かさを前面に。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1. 人格 -->
+  <section>
+    <span class="sec-num">01 — Personality</span>
+    <h2>サイトに人格を与える</h2>
+    <p class="lead">Yoriyoiが一人の人物なら、こう振る舞い、こう語りかけます。ラベリングや細部の指針になります。</p>
+    <div class="persona">
+      <div class="card"><div class="n">01</div><h4>親しい編集者</h4><p>情報を整理し、要点を渡す。押しつけず、一緒に考える。</p></div>
+      <div class="card"><div class="n">02</div><h4>安心して話せる場のホスト</h4><p>心理的に安全。迷いや未完成を尊重し、急かさない。</p></div>
+      <div class="card"><div class="n">03</div><h4>少し先を歩く伴走者</h4><p>前を歩くが引っ張らない。最後は相手が自走できるように離れる。</p></div>
+    </div>
+    <div class="attrs">
+      <span>やさしいが、幼くない</span>
+      <span>知的だが、難解ではない</span>
+      <span>親しみがあるが、馴れ馴れしくない</span>
+      <span>前向きだが、ポジティブを強要しない</span>
+      <span>静かなユーモアがある</span>
+    </div>
+  </section>
+
+  <!-- 2. ポジショニング -->
+  <section>
+    <span class="sec-num">02 — Positioning</span>
+    <h2>競合マッピングと、狙う空白地帯</h2>
+    <p class="lead">軸は「情緒的 ↔ 実務的」×「冷たい・硬質 ↔ 温かい・人間的」。競合は<b>実務的×冷たい</b>に密集。Yoriyoiは<b>実務的×温かい</b>の空白へ。</p>
+    <div class="map-wrap">
+      <svg viewBox="0 0 660 540" role="img" aria-label="競合ポジショニングマップ。横軸=情緒的から実務的、縦軸=冷たいから温かい。Yoriyoiは実務的かつ温かい右上の空白地帯に位置する。">
+        <!-- white space highlight (実務的×温かい) -->
+        <rect x="330" y="40" width="290" height="230" fill="#C8452A" opacity="0.06"/>
+        <text x="475" y="66" text-anchor="middle" font-size="11" fill="#A63A22" font-weight="700">空白地帯：ここを取る</text>
+        <!-- axes -->
+        <line x1="330" y1="40" x2="330" y2="500" stroke="#E0D7C7" stroke-width="1.5"/>
+        <line x1="40" y1="270" x2="620" y2="270" stroke="#E0D7C7" stroke-width="1.5"/>
+        <!-- axis labels -->
+        <text x="330" y="28" text-anchor="middle" font-size="12" fill="#6C6257" font-weight="600">温かい・人間的</text>
+        <text x="330" y="520" text-anchor="middle" font-size="12" fill="#6C6257" font-weight="600">冷たい・硬質</text>
+        <text x="46" y="264" text-anchor="start" font-size="12" fill="#6C6257" font-weight="600">情緒的</text>
+        <text x="614" y="264" text-anchor="end" font-size="12" fill="#6C6257" font-weight="600">実務的</text>
+        <!-- competitor dots -->
+        <g font-size="11.5" fill="#332E29">
+          <circle cx="170" cy="130" r="5" fill="#8c8c8c"/><text x="180" y="134">Muture</text>
+          <circle cx="205" cy="175" r="5" fill="#8c8c8c"/><text x="215" y="179">BIOTOPE</text>
+          <circle cx="270" cy="250" r="5" fill="#8c8c8c"/><text x="280" y="254">KESIKI</text>
+          <circle cx="360" cy="215" r="5" fill="#8c8c8c"/><text x="370" y="219">MIMIGURI</text>
+          <circle cx="450" cy="300" r="5" fill="#8c8c8c"/><text x="460" y="304">Link AI</text>
+          <circle cx="480" cy="345" r="5" fill="#8c8c8c"/><text x="490" y="349">才流</text>
+          <circle cx="515" cy="385" r="5" fill="#8c8c8c"/><text x="525" y="389">ベイジ</text>
+          <circle cx="545" cy="415" r="5" fill="#8c8c8c"/><text x="452" y="419" text-anchor="end">LayerX</text>
+        </g>
+        <!-- Yoriyoi -->
+        <circle cx="470" cy="150" r="11" fill="#C8452A"/>
+        <circle cx="470" cy="150" r="17" fill="none" stroke="#C8452A" stroke-width="1.5" opacity="0.5"/>
+        <text x="470" y="128" text-anchor="middle" font-size="14" fill="#A63A22" font-weight="700">Yoriyoi</text>
+      </svg>
+    </div>
+    <p class="map-note">※ 競合の位置は references.md の分析に基づく<b>推定</b>（実キャプチャ精査は未実施）。差別化の方針＝密集地に寄せず、<b>実務性を保ったまま温度を上げる</b>。</p>
+  </section>
+
+  <!-- 3. キーワード -->
+  <section>
+    <span class="sec-num">03 — Keywords</span>
+    <h2>トーンキーワード</h2>
+    <p class="lead">迷ったら立ち返る言葉。赤＝ブランドの核、山吹＝補助の気づき。</p>
+    <div class="kw">
+      <span class="accent">縒り合う</span>
+      <span class="accent">編む・あやとり</span>
+      <span>温かい知性</span>
+      <span>実務的</span>
+      <span>越境する</span>
+      <span class="accent2">成果</span>
+      <span class="accent2">気づき</span>
+      <span>余白</span>
+      <span>急かさない</span>
+      <span>自走に導く</span>
+      <span>対話</span>
+    </div>
+  </section>
+
+  <!-- 4. カラースキーム -->
+  <section>
+    <span class="sec-num">04 — Color Scheme</span>
+    <h2>カラースキーム（5役割）</h2>
+    <p class="lead">彩度の高い色は限定使用。<b>色に意味を固定</b>する：朱赤＝人・対話、山吹＝成果・気づき。</p>
+    <div class="colors">
+      <div class="sw"><div class="chip" style="background:#C8452A"></div><div class="info"><div class="role">メイン</div><div class="hex">#C8452A</div><div class="use">朱赤。人のぬくもり・意思・重要アクション</div></div></div>
+      <div class="sw"><div class="chip" style="background:#E4A02B"></div><div class="info"><div class="role">サブ</div><div class="hex">#E4A02B</div><div class="use">山吹。希望・気づき・補助強調（本文には使わない）</div></div></div>
+      <div class="sw"><div class="chip" style="background:#FBF7F0;border-bottom:1px solid #E0D7C7"></div><div class="info"><div class="role">背景</div><div class="hex">#FBF7F0</div><div class="use">真っ白でない温かなオフホワイト</div></div></div>
+      <div class="sw"><div class="chip" style="background:#A63A22"></div><div class="info"><div class="role">リンク</div><div class="hex">#A63A22</div><div class="use">深い朱赤＋下線。埋没させない（要確認）</div></div></div>
+      <div class="sw"><div class="chip" style="background:#332E29"></div><div class="info"><div class="role">テキスト</div><div class="hex">#332E29</div><div class="use">黒より柔らかなチャコールブラウン</div></div></div>
+    </div>
+    <div class="subswatch">
+      <span style="font-size:12px;color:var(--text-soft);font-weight:600;">補助面：</span>
+      <span class="mini"><span class="box" style="background:#F2EBDD"></span>Surface #F2EBDD</span>
+      <span class="mini"><span class="box" style="background:#EAE1D0"></span>Surface-2 #EAE1D0</span>
+      <span class="mini"><span class="box" style="background:#E0D7C7"></span>Border #E0D7C7</span>
+      <span class="mini"><span class="box" style="background:#6C6257"></span>Text-soft #6C6257</span>
+    </div>
+    <div class="callout">
+      <b>要確認（リンク色）：</b> design-system では独立したリンク色が未定義でした。web では埋没しないリンク色が重要なので、<b>深い朱赤 #A63A22＋下線</b>（オフホワイト上で約6.2:1／AA）を提案します。本文の朱赤 #C8452A と役割が被らないよう、リンクは「深い方＋下線」で差別化します。
+    </div>
+  </section>
+
+  <!-- 5. タイポグラフィ -->
+  <section>
+    <span class="sec-num">05 — Typography</span>
+    <h2>フォントは声色</h2>
+    <p class="lead">全面ゴシック（Noto Sans JP）。書体を混ぜず、<b>ウェイト・サイズ・余白</b>だけで階層をつくる。声色は「明快で、落ち着いた大人」。</p>
+    <div class="type-row"><span class="spec">Display / 700</span><span class="t-display">AIで、現場を変える。</span></div>
+    <div class="type-row"><span class="spec">H2 / 700</span><span class="t-h2">成果を先に出してから、教育する</span></div>
+    <div class="type-row"><span class="spec">H3 / 600</span><span class="t-h3">現場に、AIが得意なチームで入る</span></div>
+    <div class="type-row"><span class="spec">Body / 400</span><span class="t-body">いきなり「AIを使え」と言われても、現場は動けません。まず私たちが入り、成果を出し、無理なく自走へ導きます。</span></div>
+    <div class="type-row"><span class="spec">Caption / 400</span><span class="t-cap">※ 補助情報や注記に使う最小サイズ（13px）</span></div>
+    <p class="voice-note">声色メモ：明朝の「和の落ち着き」には寄せない。ゴシックで<b>実務的な明快さ</b>を出し、温かさは色・曲線・余白が担う。丸ゴシックと極細ウェイトは使わない。</p>
+  </section>
+
+  <!-- 6. モチーフ -->
+  <section>
+    <span class="sec-num">06 — Motif</span>
+    <h2>曲線モチーフに意味を固定する</h2>
+    <p class="lead">「AIは直線、人は曲線」。曲線は装飾でなく、<b>関係と変化を説明する</b>ために使う。</p>
+    <div class="motif">
+      <ul>
+        <li><b>交差</b>＝出会い（専門家が一時的にチームになる）</li>
+        <li><b>結び目</b>＝成果</li>
+        <li><b>分岐</b>＝事業（一本の糸が役割を変えて各事業を通過）</li>
+        <li><b>離れる</b>＝自走（Yoriyoiの糸が離れ、クライアントだけで続く）</li>
+      </ul>
+      <div class="fig">
+        <svg viewBox="0 0 320 150" width="100%" aria-label="2本の曲線が近づき交差し、結び目をつくり、片方が離れていく図">
+          <path d="M10 40 C80 40 90 75 160 75 S250 110 310 110" fill="none" stroke="#C8452A" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M10 110 C80 110 90 75 160 75 S250 40 310 40" fill="none" stroke="#E4A02B" stroke-width="2.6" stroke-linecap="round"/>
+          <circle cx="160" cy="75" r="5.5" fill="#332E29"/>
+          <text x="160" y="98" text-anchor="middle" font-size="10" fill="#6C6257">結び目＝成果</text>
+          <text x="300" y="128" text-anchor="end" font-size="10" fill="#6C6257">離れる＝自走 →</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. ムードボード -->
+  <section>
+    <span class="sec-num">07 — Mood Board</span>
+    <h2>ムードボード（方向性）</h2>
+    <p class="lead">言葉・色・質感で“空気”を共有。画像枠は実写・素材を後で差し込む前提です。</p>
+    <div class="mood">
+      <div class="tile rowspan2" style="background:#C8452A"><span class="lab">MAIN</span>人の働き・対話</div>
+      <div class="tile img">手元・ノート・対話の実写<br>（後で差込）</div>
+      <div class="tile" style="background:#E4A02B;color:#3a2c08"><span class="lab">SUB</span>気づき・成果</div>
+      <div class="tile span2 img">縒り紐 / あやとり / 線が編まれる素材</div>
+      <div class="tile" style="background:#332E29"><span class="lab">TEXT</span>静かな知性</div>
+      <div class="tile img" style="background:#FBF7F0;color:#6C6257">温かいオフホワイト<br>＋余白</div>
+      <div class="tile" style="background:#3E6B4E"><span class="lab">TONE</span>誠実・自走</div>
+      <div class="tile span2" style="background:#EAE1D0;color:#332E29"><span class="lab">参照サイト</span>Muture（編む線）／KESIKI（余白とタイポ）</div>
+    </div>
+    <p class="mood-note">参照（references.md）：視覚言語＝Muture ／ タイポと余白＝KESIKI・ベイジ ／ 情報設計＝Link AI・才流 ／ 複数事業＝MIMIGURI。</p>
+  </section>
+
+  <!-- 8. Do / Don't -->
+  <section>
+    <span class="sec-num">08 — Do / Don't</span>
+    <h2>やること / やらないこと</h2>
+    <div class="dd">
+      <div class="col do">
+        <h4>◎ Do</h4>
+        <ul>
+          <li>「成果 → 教育 → 自走」を背骨に情報を並べる</li>
+          <li>曲線は関係・変化の説明として使う</li>
+          <li>余白と説明順序で“やさしさ”をつくる</li>
+          <li>色に役割を固定する（朱赤=人／山吹=成果）</li>
+          <li>実績は誇張なく、信頼材料として</li>
+          <li>「相談する」「一緒に整理する」など急かさない言葉</li>
+        </ul>
+      </div>
+      <div class="col dont">
+        <h4>△ Don't</h4>
+        <ul>
+          <li>明朝・丸ゴシック・極細ウェイト</li>
+          <li>水引/和柄/ご祝儀袋など和風装飾への寄せすぎ</li>
+          <li>スピリチュアル・自己啓発（光・ポエム・過剰グラデ）</li>
+          <li>青く光る回路・ロボットなど未来的AI表現</li>
+          <li>理想化されたストックフォト（笑顔の握手）</li>
+          <li>カウントダウン・点滅・「今すぐ」で急かす</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="confirm">
+      <h4>この最終盤で、確認・判断したい点</h4>
+      <ol>
+        <li><b>リンク色</b>：深い朱赤 #A63A22＋下線 で確定してよいか（design-system に反映する）</li>
+        <li><b>ポジショニング軸</b>：「情緒的↔実務的 × 冷たい↔温かい」でよいか（Soft/Hard・Warm/Cool でも可）</li>
+        <li><b>競合の位置</b>：推定なので、実キャプチャで微調整するか</li>
+        <li><b>ムードボードの実写</b>：どの写真・素材を入れるか（手元・対話・縒り紐など）</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    Yoriyoi Tone &amp; Manner Sheet v0.1 ／ 準拠：<a href="design-system.md">design-system.md</a> ・ <a href="references.md">references.md</a> ／ 方法論：tone-and-manner skill（山口陽一郎氏の考え方に基づく）
+  </footer>
+
+</div>
+</body>
+</html>
