@@ -365,34 +365,43 @@ AIの推薦を決定事項にせず、本人とプロジェクト双方の意思
 
 ### Font Families (Confirmed)
 
-見出しは編集的な明朝、本文は可読性の高いゴシックで対比をつける。すべて Google Fonts 系で無償・Web 埋め込み可能なものを基準にする。
+> **📌 2026-07-26 決定：全面ゴシック。** 事業方向の転換（越境・挑戦・まずやってみる）に伴い、
+> 見出しの明朝運用を取りやめ、**見出し・本文ともゴシック**に統一する。
+> 対比は「書体の種類」ではなく **ウェイト・サイズ・余白**でつくる。
+> 理由：明朝は「静かな和の落ち着き」に寄りすぎ、B2Bでの実務的な信頼感・現代性と合わないため。
+> 世界観の"人らしさ"は**曲線モチーフ**が担い、書体は可読性と明快さに徹する。
+
+すべて Google Fonts 系で無償・Web 埋め込み可能なものを基準にする。
 
 | Role | Family | Fallback |
 |---|---|---|
-| Heading / Display | **Noto Serif JP**（Medium 500 / SemiBold 600） | `"Hiragino Mincho ProN","Yu Mincho",serif` |
-| Body | **Noto Sans JP**（Regular 400 / Medium 500） | `"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif` |
-| Accent（限定） | Noto Serif JP | 見出しと同じ。装飾的な一文・引用に限定 |
-| Latin / 数字 | Noto Sans（本文）/ Noto Serif（見出し） | `system-ui` |
+| Heading / Display | **Noto Sans JP**（Bold 700 / SemiBold 600） | `"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif` |
+| Body | **Noto Sans JP**（Regular 400 / Medium 500） | 同上 |
+| Latin / 数字 | Noto Sans | `system-ui` |
 
 - ロゴのワードマークは専用ロゴデータを使用し、本文フォントで代替しない。
+- **丸ゴシックは使わない**（幼く見えるため。§8「やさしいが、幼くない」）。
+- 明朝は原則使用しない。使う場合は引用など**ごく限定的な用途**に留め、事前に判断すること。
 
 ### Type Scale（base 16px / rem）
 
 日本語本文は行間 1.7 を基準にゆとりを持たせる。
 
-| Token | 用途 | size | line-height | weight | family |
+| Token | 用途 | size | line-height | weight | letter-spacing |
 |---|---|---|---|---|---|
-| `--fs-display` | ページ主見出し | 2.5rem (40px) | 1.3 | 600 | Serif |
-| `--fs-h1` | H1 | 2rem (32px) | 1.35 | 600 | Serif |
-| `--fs-h2` | H2 | 1.5rem (24px) | 1.4 | 600 | Serif |
-| `--fs-h3` | H3 | 1.25rem (20px) | 1.5 | 500 | Serif |
-| `--fs-body-lg` | リード文 | 1.125rem (18px) | 1.8 | 400 | Sans |
-| `--fs-body` | 本文 | 1rem (16px) | 1.7 | 400 | Sans |
-| `--fs-sm` | 補助 | 0.875rem (14px) | 1.6 | 400 | Sans |
-| `--fs-caption` | キャプション（最小） | 0.8125rem (13px) | 1.5 | 400 | Sans |
+| `--fs-display` | ページ主見出し | 2.5rem (40px) | 1.3 | **700** | -0.01em |
+| `--fs-h1` | H1 | 2rem (32px) | 1.35 | **700** | -0.01em |
+| `--fs-h2` | H2 | 1.5rem (24px) | 1.4 | **700** | 0 |
+| `--fs-h3` | H3 | 1.25rem (20px) | 1.5 | **600** | 0 |
+| `--fs-body-lg` | リード文 | 1.125rem (18px) | 1.8 | 400 | 0.01em |
+| `--fs-body` | 本文 | 1rem (16px) | 1.7 | 400 | 0.01em |
+| `--fs-sm` | 補助 | 0.875rem (14px) | 1.6 | 400 | 0.02em |
+| `--fs-caption` | キャプション（最小） | 0.8125rem (13px) | 1.5 | 400 | 0.02em |
 
+- family は全て **Noto Sans JP**（見出しも本文も同一）。
 - 13px を最小とし、これより小さい文字を本文・ラベルに使わない。
-- 見出しの明朝は Medium(500)〜SemiBold(600)。Light は使わない（細すぎ回避）。
+- **見出しと本文の差は「ウェイト（700/600 vs 400）＋サイズ＋余白」でつける。** 書体を変えない。
+- 大きい見出しほど字間をわずかに詰める（-0.01em）と、ゴシックでも締まって見える。
 
 ### Typography Rules
 
@@ -403,8 +412,8 @@ AIの推薦を決定事項にせず、本人とプロジェクト双方の意思
 - 行間と段落間に十分な余白を設ける
 - 日本語の文字量を前提に設計する
 - 英語を装飾として過剰使用しない
-- 明朝は見出し・引用に限定し、長い本文には使わない
 - Light ウェイトを本文・見出しに使わない（細すぎ回避）
+- 書体を混ぜて対比をつくらない（**ウェイトと余白**で階層を出す）
 
 ---
 

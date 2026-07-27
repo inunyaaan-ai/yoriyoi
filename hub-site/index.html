@@ -6,10 +6,10 @@
 <title>Yoriyoi ｜ 名刺ハブサイト</title>
 <meta name="description" content="名刺から、その人の活動・発信・連絡先へ。Yoriyoiの名刺ハブサイト。" />
 <link rel="icon" type="image/svg+xml" href="../assets/logo/yoriyoi_mark.svg" />
-<!-- Fonts: 見出し=Noto Serif JP(明朝) / 本文=Noto Sans JP -->
+<!-- Fonts: 全面ゴシック（Noto Sans JP）。階層はウェイト＋サイズ＋余白でつける（design-system §13） -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" />
 <style>
   /* ============================================================
      Yoriyoi Business Card Hub Site
@@ -35,7 +35,6 @@
     --radius:     14px;
     --maxw:       460px;
     --font-sans:  "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
-    --font-serif: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
     /* 背景の地紋(§26)。立涌なら tatewaku.jpg、網代なら ajiro.jpg に差し替え */
     --pattern:         url("../assets/patterns/shippou_tile.jpg"); /* 周期切出しの継ぎ目なしタイル(2柄分) */
     --pattern-opacity: 0.55;
@@ -116,14 +115,14 @@
     padding: 3px 10px; border-radius: 999px; margin-bottom: 8px;
   }
   .relation .dot { width: 12px; height: 12px; flex: none; }
-  .identity h1 { font-family: var(--font-serif); font-size: 23px; font-weight: 600; letter-spacing: 0.02em; margin: 0; }
+  .identity h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.01em; margin: 0; }
   .identity .role {
-    font-size: 13px; color: var(--text-soft); margin: 3px 0 0;
+    font-size: 13px; color: var(--text-soft); margin: 4px 0 0; letter-spacing: 0.02em;
   }
   .identity .role .en { color: var(--border); margin: 0 7px; }
   .identity .tagline {
-    margin: 7px auto 0; max-width: 34ch; font-family: var(--font-serif);
-    font-size: 14px; font-weight: 500; color: var(--text); line-height: 1.7;
+    margin: 9px auto 0; max-width: 34ch;
+    font-size: 14px; font-weight: 400; color: var(--text); line-height: 1.7; letter-spacing: 0.01em;
   }
 
   /* 縒り divider (thin) */
@@ -179,7 +178,7 @@
   /* ---------------- Footer ---------------- */
   .foot { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center; }
   .foot .logo { width: 240px; height: auto; display: block; margin: 0 auto; }
-  .foot .by { font-family: var(--font-serif); font-size: 12.5px; font-weight: 500; color: var(--text-soft); margin-top: 8px; letter-spacing: 0.03em; }
+  .foot .by { font-size: 12px; font-weight: 400; color: var(--text-soft); margin-top: 8px; letter-spacing: 0.04em; }
 
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
