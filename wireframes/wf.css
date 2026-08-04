@@ -94,6 +94,22 @@
   .li .ar{font-size:9px;color:var(--sub);flex:none;}
   .li.primary{border-color:#3a3a3a;border-width:1.5px;background:#f6f6f6;}
   .li.primary .lbl{font-weight:700;}
+
+  /* v0.4: 画像カード階層（上位=画像+説明、下位=簡易行）＋ CTAの弱色化
+     参考: ivory634684.studio.site のカード構成／studio.siteモックアップ Jgqe4RNwOk */
+  .linkblock{background:#ececec;border-radius:14px;padding:14px 12px 16px;}
+  .cta-row{display:flex;align-items:center;gap:8px;padding:6px 4px 14px;border-bottom:1px dashed var(--line);margin-bottom:12px;}
+  .cta-row .lbl{font-size:10.5px;color:var(--ink);flex:1;min-width:0;}
+  .cta-row .ar{font-size:10px;color:var(--sub);flex:none;}
+  .card-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;}
+  .card .img{height:58px;border-radius:0;font-size:9px;}
+  .card .body{padding:8px 9px 10px;}
+  .card .ti{font-size:10px;font-weight:700;margin:0 0 4px;line-height:1.3;}
+  .card .de{font-size:8.5px;color:var(--sub);line-height:1.45;margin:0;}
+  .card.wide{grid-column:1/-1;display:flex;gap:10px;}
+  .card.wide .img{width:56px;height:56px;flex:none;font-size:8px;}
+  .card.wide .body{padding:8px 10px 8px 0;flex:1;min-width:0;}
   .fold{display:flex;align-items:center;gap:6px;margin:9px 0;color:#3a3a3a;font-weight:700;font-size:9px;white-space:nowrap;}
   .fold::before,.fold::after{content:"";height:0;border-top:2px dashed #3a3a3a;flex:1;}
   .variant{border:1px solid var(--line);border-radius:8px;background:#fff;padding:16px;}

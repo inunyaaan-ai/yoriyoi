@@ -6,39 +6,43 @@
 <title>Yoriyoi ｜ 名刺ハブサイト</title>
 <meta name="description" content="名刺から、その人の活動・発信・連絡先へ。Yoriyoiの名刺ハブサイト。" />
 <link rel="icon" type="image/svg+xml" href="../assets/logo/yoriyoi_mark.svg" />
-<!-- Fonts: 全面ゴシック（Noto Sans JP）。階層はウェイト＋サイズ＋余白でつける（design-system §13） -->
+<!-- Fonts: Zen Kaku Gothic New（見出し）＋ IBM Plex Sans JP（本文） -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600&amp;family=Zen+Kaku+Gothic+New:wght@500;700&amp;display=swap" />
 <style>
   /* ============================================================
      Yoriyoi Business Card Hub Site
      Brand: ../brand/design-system.md 準拠
-     - 温かなオフホワイト背景 / チャコールブラウン文字
-     - 朱赤(重要) / 山吹色(補助) を限定的に / 縒り合う線モチーフ
+     - 近黒の地 / 朱赤→山吹の光 / エアリーなガラス面
+     - グラデーションは背景グロー・縒り線・CTA縁に限定
      - リンクをファーストビューに収めるコンパクト構成
      ============================================================ */
 
   :root {
-    --red:        #C8452A;
-    --red-deep:   #A63A22;
+    --red:        #E4572E;
+    --red-deep:   #C8452A;
     --yellow:     #E4A02B;
-    --bg:         #FBF7F0;
-    --surface:    #F2EBDD;
-    --surface-2:  #EAE1D0;
-    --text:       #332E29;
-    --text-soft:  #6C6257;
-    --border:     #E0D7C7;
+    --bg:         #120F0A;
+    --surface:    rgba(24,20,16,.30);
+    --surface-2:  rgba(255,255,255,.07);
+    --text:       #F7F1E7;
+    --text-soft:  #BDB4A6;
+    --border:     rgba(255,255,255,.13);
     --white:      #FFFFFF;
-    --shadow:     0 2px 8px rgba(51, 46, 41, 0.06);
-    --shadow-lg:  0 8px 24px rgba(51, 46, 41, 0.10);
+    --shadow:     inset 0 1px 0 rgba(255,255,255,.12), 0 16px 36px rgba(0,0,0,.32);
+    --shadow-lg:  inset 0 1px 0 rgba(255,255,255,.16), 0 24px 50px rgba(0,0,0,.42);
     --radius:     14px;
+    /* 参考サイトのカード（白系プレート×黒文字）に寄せたトークン。.foot .logo-plate と同系統の明るい面 */
+    --card-surface: rgba(255,252,246,.96);
+    --card-thumb:   #EDE6D8;
+    --card-ink:     #1B160E;
+    --card-ink-soft:#6E6455;
+    --card-border:  rgba(20,16,10,.08);
+    --card-shadow:  0 14px 28px rgba(0,0,0,.34);
     --maxw:       460px;
-    --font-sans:  "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", system-ui, sans-serif;
-    /* 背景の地紋(§26)。立涌なら tatewaku.jpg、網代なら ajiro.jpg に差し替え */
-    --pattern:         url("../assets/patterns/shippou_tile.jpg"); /* 周期切出しの継ぎ目なしタイル(2柄分) */
-    --pattern-opacity: 0.55;
-    --pattern-size:    162px; /* タイル(2柄)の表示幅。小さく=細かい / 大きく=大きい柄 */
+    --font-sans:  "IBM Plex Sans JP", "Noto Sans JP", sans-serif;
+    --font-heading:"Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
   }
 
   * { box-sizing: border-box; }
@@ -57,19 +61,36 @@
   .page {
     position: relative;
     min-height: 100vh;
-    background:
-      radial-gradient(1000px 320px at 15% -5%, rgba(228,160,43,0.06), transparent 60%),
-      radial-gradient(800px 300px at 90% 0%, rgba(200,69,42,0.05), transparent 55%);
+    background-color: var(--bg);
+    background-repeat: no-repeat;
+    background-image:
+      radial-gradient(600px 420px, rgba(228,87,46,.30), transparent 62%),
+      radial-gradient(620px 430px, rgba(228,160,43,.26), transparent 64%),
+      radial-gradient(440px 300px, rgba(255,137,46,.18), transparent 60%);
+    background-position: 22% 10%, 82% 28%, 52% 18%;
+    animation: bg-drift 20s ease-in-out infinite;
   }
-  /* 背景の地紋(§26): トーンオントーンで低不透明度。本文の可読性を優先 */
+  /* 発光の交差部だけを screen で溶かし、本文直下は暗いスクリムで守る */
   .page::before {
     content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    background-image: var(--pattern);
-    background-size: var(--pattern-size) auto;
-    background-repeat: repeat;
-    background-position: center top;
-    mix-blend-mode: multiply;
-    opacity: var(--pattern-opacity);
+    background-repeat: no-repeat;
+    background-image: radial-gradient(340px 210px, rgba(255,158,55,.18), transparent 70%);
+    background-position: 50% 13%;
+    mix-blend-mode:screen;
+    animation: bg-drift-2 14s ease-in-out infinite;
+  }
+  @keyframes bg-drift {
+    0%   { background-position: 22% 10%, 82% 28%, 52% 18%; }
+    33%  { background-position: 34% 18%, 72% 38%, 40% 26%; }
+    66%  { background-position: 14% 4%,  90% 18%, 60% 10%; }
+    100% { background-position: 22% 10%, 82% 28%, 52% 18%; }
+  }
+  @keyframes bg-drift-2 {
+    0%, 100% { background-position: 50% 13%; }
+    50%      { background-position: 62% 24%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .page, .page::before { animation: none; }
   }
   .wrap { position: relative; z-index: 1; max-width: var(--maxw); margin: 0 auto; padding: 0 18px 28px; }
   a { color: inherit; }
@@ -80,21 +101,21 @@
     position: relative;
     height: 88px;
     margin: 0 -18px;
-    background: linear-gradient(120deg, #2B4A5E 0%, #35606F 100%);
+    background:#0E0C0A;
     overflow: hidden;
   }
   .cover::after {
     content: ""; position: absolute; inset: 0;
     background:
-      radial-gradient(480px 160px at 20% 120%, rgba(228,160,43,0.22), transparent 60%),
-      radial-gradient(480px 170px at 85% -20%, rgba(200,69,42,0.20), transparent 60%);
+      radial-gradient(480px 170px at 15% 115%, rgba(228,87,46,.62), transparent 60%),
+      radial-gradient(480px 170px at 88% -20%, rgba(228,160,43,.58), transparent 60%);
   }
   .avatar {
     position: relative;
     width: 82px; height: 82px;
     margin: -44px auto 0;
     border-radius: 50%;
-    border: 3px solid var(--bg);
+    border: 1px solid rgba(255,255,255,.2);
     background: var(--surface-2);
     box-shadow: var(--shadow-lg);
     overflow: hidden; display: block; z-index: 2;
@@ -115,7 +136,7 @@
     padding: 3px 10px; border-radius: 999px; margin-bottom: 8px;
   }
   .relation .dot { width: 12px; height: 12px; flex: none; }
-  .identity h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.01em; margin: 0; }
+  .identity h1 { font-family:var(--font-heading); font-size: 24px; font-weight: 700; letter-spacing: .06em; margin: 0; text-shadow:0 2px 18px rgba(0,0,0,.65); }
   .identity .role {
     font-size: 13px; color: var(--text-soft); margin: 4px 0 0; letter-spacing: 0.02em;
   }
@@ -141,43 +162,81 @@
   .links { display: flex; flex-direction: column; gap: 8px; }
   .link {
     display: flex; align-items: center; gap: 12px;
-    background: var(--white);
-    border: 1px solid var(--border);
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.20);
     border-radius: var(--radius);
     padding: 10px 14px;
     text-decoration: none; color: var(--text);
-    box-shadow: var(--shadow);
-    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 16px 36px rgba(0,0,0,.28);
+    backdrop-filter:blur(20px) saturate(1.3); -webkit-backdrop-filter:blur(20px) saturate(1.3);
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
   }
-  .link:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); border-color: #D3C9B6; }
+  .link:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 20px 40px rgba(0,0,0,.34); border-color: rgba(255,255,255,.32); background: rgba(255,255,255,.13); }
   .link:active { transform: translateY(0); }
   .link .ico {
     width: 34px; height: 34px; flex: none; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center; background: var(--surface);
+    display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,.08);
   }
   .link .ico svg { width: 20px; height: 20px; display: block; }
   .link .label { flex: 1 1 auto; min-width: 0; font-size: 14.5px; font-weight: 600; }
   .link .ext { flex: none; width: 16px; height: 16px; color: var(--text-soft); opacity: .65; }
   .link .ext svg { width: 100%; height: 100%; }
 
-  /* Primary CTA (§25 Button/Primary): 墨(チャコール)・白文字、朱赤×山吹は縒りアイコンのアクセントに */
-  .link--primary {
-    background: var(--text);
-    border-color: var(--text);
-    color: var(--white);
-    box-shadow: 0 4px 14px rgba(51, 46, 41, 0.22);
+  /* ---------------- HP Banner（コーポレートサイト・画像＋キャッチコピー / v0.6）
+     参考: studio.siteモックアップ。画像は後日「コーポレートサイトのビジュアル＋キャッチコピー」を差し込み、
+     画像全体がコーポレートサイトへのリンクになる。 ---------------- */
+  .hp-banner { display: block; text-decoration: none; color: var(--text); }
+  .hp-banner-img {
+    height: 116px; border-radius: 12px; overflow: hidden;
+    background: var(--card-thumb); border: 1px solid var(--card-border);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    color: var(--card-ink-soft);
+    box-shadow: var(--card-shadow);
+    transition: box-shadow .15s ease, transform .15s ease;
   }
-  .link--primary:hover { background: #211D19; border-color: #211D19; box-shadow: 0 6px 18px rgba(51, 46, 41, 0.28); }
-  .link--primary .ico { background: var(--bg); overflow: hidden; }
-  .link .ico .mark { width: 27px; height: 27px; display: block; object-fit: contain; }
-  /* 円で切り抜き、縒りの線端を円外に逃がして隠す */
-  .link--primary .ico .mark { width: 46px; height: 46px; }
-  .link--primary .label { color: var(--white); font-weight: 700; }
-  .link--primary .ext { color: var(--white); opacity: .8; }
+  .hp-banner-img svg { width: 26px; height: 26px; opacity: .5; }
+  .hp-banner-img .soon { font-size: 10px; letter-spacing: .05em; opacity: .75; }
+  .hp-banner:hover .hp-banner-img { transform: translateY(-1px); box-shadow: 0 18px 34px rgba(0,0,0,.4); }
+  .hp-banner-cap { display: flex; align-items: center; gap: 8px; padding: 10px 2px 0; }
+  .hp-banner-cap .label { flex: 1 1 auto; min-width: 0; font-size: 13.5px; font-weight: 600; }
+  .hp-banner-cap .ext { flex: none; width: 14px; height: 14px; color: var(--text-soft); opacity: .7; }
+  .hp-banner-cap .ext svg { width: 100%; height: 100%; }
+
+  /* ---------------- Cards（白プレート×黒文字・参考サイト準拠 / v0.5） ---------------- */
+  .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 9px; }
+  .card {
+    display: block; text-decoration: none;
+    background: var(--card-surface); border: 1px solid var(--card-border); border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .card:hover { transform: translateY(-1px); box-shadow: 0 18px 34px rgba(0,0,0,.4); }
+  .card .thumb {
+    height: 82px; display: flex; align-items: center; justify-content: center;
+    background: var(--card-thumb); color: var(--card-ink-soft); overflow: hidden;
+  }
+  .card .thumb svg { width: 24px; height: 24px; opacity: .6; }
+  .card .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card .body { padding: 9px 10px 11px; }
+  .card .ti { font-size: 12px; font-weight: 700; color: var(--card-ink); margin: 0 0 4px; line-height: 1.35; letter-spacing: .01em; }
+  .card .de {
+    font-size: 10px; color: var(--card-ink-soft); line-height: 1.5; margin: 0;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .card.wide { grid-column: 1 / -1; display: flex; }
+  .card.wide .thumb { width: 92px; height: auto; flex: none; }
+  .card.wide .body { padding: 10px 12px 10px 0; flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
 
   /* ---------------- Footer ---------------- */
-  .foot { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--border); text-align: center; }
-  .foot .logo { width: 240px; height: auto; display: block; margin: 0 auto; }
+  .foot { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--border); text-align: center; }
+  .foot .logo-plate {
+    width:min(100%,320px); margin:0 auto; padding:9px 28px 5px;
+    border:1px solid rgba(255,255,255,.44); border-radius:18px;
+    background:rgba(255,252,246,.94);
+    box-shadow:inset 0 1px 0 #fff,0 16px 36px rgba(0,0,0,.24),0 0 26px rgba(228,112,46,.10);
+  }
+  .foot .logo { width:210px; max-width:100%; height:auto; display:block; margin:-31px auto -29px; }
   .foot .by { font-size: 12px; font-weight: 400; color: var(--text-soft); margin-top: 8px; letter-spacing: 0.04em; }
 
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
@@ -197,39 +256,89 @@
     <section class="identity">
       <span class="relation">
         <svg class="dot" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15c4-6 6 6 10 0s6-6 8 0" fill="none" stroke="#C8452A" stroke-width="2.4" stroke-linecap="round"/><path d="M3 9c4-6 6 6 10 0s6-6 8 0" fill="none" stroke="#E4A02B" stroke-width="2.4" stroke-linecap="round"/></svg>
-        Yoriyoi 代表
+        Yoriyoi 発起人 / CVO
       </span>
-      <h1>ゆうぎり</h1>
-      <p class="role">VTuber<span class="en">/</span>作家・講演家</p>
-      <p class="tagline">人とプロジェクトの接点を、よりよい出会いへ。</p>
+      <h1>ゆうぎり（由宇霧）</h1>
+      <p class="role">ナラティビスト<span class="en">/</span>バーチャル界の空海</p>
+      <p class="tagline">活動や発信を、こちらからご覧いただけます。</p>
     </section>
 
-    <!-- Links (flat / 見出しなし) -->
+    <!-- HP Banner: コーポレートサイトへの導線（画像に会社ビジュアル＋キャッチコピーを差し込み予定、画像クリックで遷移） -->
     <section class="section">
-      <div class="links">
-        <a class="link link--primary" href="#">
-          <span class="ico"><img class="mark" src="../assets/logo/yoriyoi_mark.svg" alt="" /></span>
-          <span class="label">Yoriyoiとは</span>
+      <a class="hp-banner" href="#" aria-label="株式会社Yoriyoi コーポレートサイトへ">
+        <div class="hp-banner-img" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 15l5-5 4 4 3-3 6 6"/><circle cx="8" cy="9" r="1.5" fill="currentColor" stroke="none"/></svg>
+          <span class="soon">ビジュアル準備中</span>
+        </div>
+        <div class="hp-banner-cap">
+          <span class="label">株式会社Yoriyoi コーポレートサイト</span>
           <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+    </section>
+
+    <!-- Links (v0.5: 画像カード階層 + 簡易行) -->
+    <section class="section">
+      <div class="card-grid">
+        <a class="card" href="https://www.youtube.com/@oiran_yugiri" target="_blank" rel="noopener">
+          <div class="thumb"><img src="../assets/card-images/youtube-profile.jpg" alt="" /></div>
+          <div class="body">
+            <p class="ti">YouTube｜しくじり性教育</p>
+            <p class="de">失敗や成功体験と共に性知識・恋愛・人間関係を語るチャンネル</p>
+          </div>
         </a>
-        <a class="link" href="#" target="_blank" rel="noopener">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 8v8M8 8l6 8M16 8v8"/></svg></span>
-          <span class="label">note</span>
+        <a class="card" href="https://note.com/yugiri1115/" target="_blank" rel="noopener">
+          <div class="thumb"><img src="../assets/card-images/note-profile.jpg" alt="" /></div>
+          <div class="body">
+            <p class="ti">note</p>
+            <p class="de">ナラティビストとしての発信・活動レポート</p>
+          </div>
+        </a>
+        <a class="card" href="https://x.com/oiran_yugiri" target="_blank" rel="noopener">
+          <div class="thumb"><img src="../assets/card-images/x-banner.jpg" alt="" style="object-position: 70% center;" /></div>
+          <div class="body">
+            <p class="ti">X</p>
+            <p class="de">日々の発信・告知</p>
+          </div>
+        </a>
+        <a class="card" href="https://www.instagram.com/yugiri_1115" target="_blank" rel="noopener">
+          <div class="thumb"><img src="../assets/card-images/instagram-profile.jpg" alt="" /></div>
+          <div class="body">
+            <p class="ti">Instagram</p>
+            <p class="de">活動のビジュアル記録</p>
+          </div>
+        </a>
+
+        <a class="card wide" href="https://amzn.asia/d/06aXuEc8" target="_blank" rel="noopener">
+          <div class="thumb"><img src="../assets/card-images/book-cover.jpg" alt="" style="object-position: top center;" /></div>
+          <div class="body">
+            <p class="ti">著書 最新刊</p>
+            <p class="de">Amazonの著書ページへ</p>
+          </div>
+        </a>
+        <a class="card wide" href="https://www.foriio.com/yugiri" target="_blank" rel="noopener">
+          <div class="thumb"><img src="../assets/card-images/foriio-og.jpg" alt="" style="object-position: left center;" /></div>
+          <div class="body">
+            <p class="ti">活動ポートフォリオ（foriio）</p>
+            <p class="de">これまでの実績一覧</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="links">
+        <a class="link" href="https://mosh.jp/yugiri1115/home" target="_blank" rel="noopener">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3"/><path d="M6 20c0-4 2-6 6-6s6 2 6 6"/></svg></span>
+          <span class="label">1対1相談（mosh）</span>
           <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
         </a>
-        <a class="link" href="#" target="_blank" rel="noopener">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M11 9.5l4 2.5-4 2.5z" fill="#333" stroke="none"/></svg></span>
-          <span class="label">YouTube</span>
+        <a class="link" href="https://ch.nicovideo.jp/yugiri" target="_blank" rel="noopener">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="14" rx="2"/><path d="M8 3l4 3 4-3M8 12h.01M16 12h.01"/></svg></span>
+          <span class="label">ニコニコ有料ch</span>
           <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
         </a>
-        <a class="link" href="#" target="_blank" rel="noopener">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.1" fill="#333" stroke="none"/></svg></span>
-          <span class="label">Instagram</span>
-          <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
-        </a>
-        <a class="link" href="#" target="_blank" rel="noopener">
-          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h3l13 16h-3zM4 20l6-7M20 4l-6 7"/></svg></span>
-          <span class="label">X（Twitter）</span>
+        <a class="link" href="https://yugiri1115.fanbox.cc/" target="_blank" rel="noopener">
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-8-4.5-8-10a4 4 0 017-2.6A4 4 0 0120 10c0 5.5-8 10-8 10z"/></svg></span>
+          <span class="label">支援窓口（FANBOX）</span>
           <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
         </a>
       </div>
@@ -237,7 +346,9 @@
 
     <!-- Footer -->
     <footer class="foot">
-      <img class="logo" src="../assets/logo/yoriyoi_logo.svg" alt="Yoriyoi" />
+      <div class="logo-plate">
+        <img class="logo" src="../assets/logo/yoriyoi_logo.svg" alt="Yoriyoi" />
+      </div>
       <div class="by">それぞれの可能性を、よりよい出会いへ。</div>
     </footer>
 

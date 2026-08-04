@@ -22,7 +22,7 @@
 ├── wireframes/                 ワイヤーフレーム v0.2（構造・情報設計の確定用）
 │   ├── index.html              目次
 │   ├── corporate.html          ① コーポレートサイト
-│   ├── card-hub.html           ② 名刺 → 名刺ハブサイト
+│   ├── yugiri.html              ② 名刺 → 名刺ハブサイト
 │   └── wf.css                  共通スタイル
 │
 ├── hub-site/
