@@ -28,13 +28,9 @@
 ├── hub-site/
 │   └── index.html              名刺ハブサイト 実装（HTML/CSS 一枚完結）
 │
-├── assets/
+└── assets/
 │   ├── logo/                   ロゴ各種（svg / png）
 │   └── patterns/               地紋素材（七宝ほか）
-│
-└── logs/                       意思決定の経緯（Discord 要約）
-    ├── 2026-07-25_discord.md   方向転換・インフラ整備
-    └── 2026-07-26_discord.md   実リンクデータ・AUTOMATA実証
 ```
 
 ---

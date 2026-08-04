@@ -9,3 +9,6 @@ assets/patterns/*.jpg
 !assets/patterns/shippou_tile.jpg
 assets/logo/yoriyoi_fab.svg
 assets/logo/yoriyoi_fab-*.png
+
+# Discord等の内部進捗ログ（ローカル専用）
+logs/
