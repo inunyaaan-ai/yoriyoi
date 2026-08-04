@@ -23,12 +23,29 @@
     -webkit-font-smoothing:antialiased;line-height:1.75;position:relative;overflow-x:hidden;}
 
   /* ==== richer, brighter warm glows behind glass ==== */
-  .glow{position:fixed;border-radius:50%;filter:blur(80px);z-index:0;pointer-events:none;mix-blend-mode:screen;}
-  .g1{width:560px;height:560px;background:#D8431F;top:-140px;left:-90px;opacity:0.72;}
-  .g2{width:520px;height:520px;background:#E4A02B;top:220px;right:-120px;opacity:0.58;}
-  .g3{width:480px;height:480px;background:#FF6A2C;top:60px;left:34%;opacity:0.5;}
-  .g4{width:440px;height:440px;background:#E4A02B;bottom:-160px;left:20%;opacity:0.4;}
-  .g5{width:360px;height:360px;background:#C8452A;bottom:120px;right:8%;opacity:0.42;}
+  .glow{position:fixed;border-radius:50%;filter:blur(80px);z-index:0;pointer-events:none;mix-blend-mode:screen;
+    animation-timing-function:ease-in-out;animation-iteration-count:infinite;will-change:transform;}
+  .g1{width:560px;height:560px;background:#D8431F;top:-140px;left:-90px;opacity:0.72;animation:drift-a 16s infinite ease-in-out;}
+  .g2{width:520px;height:520px;background:#E4A02B;top:220px;right:-120px;opacity:0.58;animation:drift-b 20s infinite ease-in-out;animation-delay:-4s;}
+  .g3{width:480px;height:480px;background:#FF6A2C;top:60px;left:34%;opacity:0.5;animation:drift-a 14s infinite ease-in-out reverse;animation-delay:-7s;}
+  .g4{width:440px;height:440px;background:#E4A02B;bottom:-160px;left:20%;opacity:0.4;animation:drift-b 18s infinite ease-in-out reverse;animation-delay:-3s;}
+  .g5{width:360px;height:360px;background:#C8452A;bottom:120px;right:8%;opacity:0.42;animation:drift-a 13s infinite ease-in-out;animation-delay:-6s;}
+
+  @keyframes drift-a{
+    0%{transform:translate(0,0) scale(1);}
+    33%{transform:translate(150px,-100px) scale(1.15);}
+    66%{transform:translate(-90px,130px) scale(0.88);}
+    100%{transform:translate(0,0) scale(1);}
+  }
+  @keyframes drift-b{
+    0%{transform:translate(0,0) scale(1);}
+    33%{transform:translate(-140px,110px) scale(1.12);}
+    66%{transform:translate(120px,-90px) scale(0.87);}
+    100%{transform:translate(0,0) scale(1);}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .glow{animation:none;}
+  }
   /* subtle scrim so text stays readable over bright glows */
   .scrim{position:fixed;inset:0;z-index:0;pointer-events:none;
     background:radial-gradient(120% 90% at 50% 30%, rgba(18,15,10,0) 0%, rgba(18,15,10,0.35) 70%, rgba(18,15,10,0.6) 100%);}
@@ -40,7 +57,9 @@
     padding:12px 18px;border-radius:18px;border:var(--glass-edge);
     background:rgba(20,16,12,0.42);backdrop-filter:blur(20px) saturate(1.2);-webkit-backdrop-filter:blur(20px) saturate(1.2);
     box-shadow:var(--glass-hi),0 12px 30px rgba(0,0,0,0.35);}
-  .logo{font-size:16px;font-weight:800;letter-spacing:0.06em;color:var(--ink);}
+  .logo-plate{display:flex;align-items:center;padding:2px 16px;border-radius:12px;background:rgba(255,252,246,.94);
+    border:1px solid rgba(255,255,255,.44);box-shadow:inset 0 1px 0 #fff,0 10px 24px rgba(0,0,0,.22);}
+  .logo{height:42px;width:auto;display:block;margin:-10px 0;}
   .nav-links{display:flex;gap:20px;font-size:13px;color:var(--soft);}
   @media(max-width:640px){.nav-links{display:none;}}
 
@@ -103,7 +122,7 @@
   <div class="page">
 
     <nav>
-      <div class="logo">Yoriyoi</div>
+      <span class="logo-plate"><img class="logo" src="../../assets/logo/yoriyoi_logo.svg" alt="Yoriyoi" /></span>
       <div class="nav-links"><span>事業</span><span>私たち</span><span>実績</span><span>VEN</span></div>
       <button class="btn sm">相談する</button>
     </nav>

@@ -1,7 +1,7 @@
 # Yoriyoi Brand Design System
 
-**Version:** 0.2  
-**Status:** Foundation + implementation tokens（HEX・フォント・スケール・コンポーネントを確定）  
+**Version:** 1.0
+**Status:** Visual direction confirmed（Dark Glass / 2026-07-29）
 **Purpose:** Yoriyoiのブランド思想、言語表現、ビジュアル、UI/UX、HCD原則を一貫して運用するための基礎設計  
 **Primary use cases:** コーポレートサイト、名刺QRから遷移するハブサイト、各種紹介資料、SNS・note等の発信
 
@@ -21,7 +21,7 @@
 > | §5・§6・§8〜§21 | 🟢 **有効** — ロゴ、トーン、UI、HCD原則、判断チェックリスト |
 > | §17 Site Roles | 🟢 **有効** — コーポレート／名刺ハブの役割定義は現行の設計根拠 |
 > | §22 / §23 | 🟡 §22はPart IIで大半が解決済み。§23の要約は§1と同様に要改訂 |
-> | **Part II §24〜§26（実装トークン）** | 🟢 **最新・有効** — 方向転換の影響を受けない |
+> | **Part II §24〜§26（実装トークン）** | 🟢 **最新・有効** — Dark Glass v1.0 |
 >
 > **方向転換の内容：** 主体＝ブランド→**株式会社**／相手＝個人→**B2B＋専門家**／中核＝AIマッチング→**AI社会実装支援・研修・共創・VEN**／AI＝選ぶ材料を出す→**成果までつくる基盤**／トーン＝静か・急かさない→**越境・挑戦・まずやってみる**
 > （位置づけは「AI押しつけへのカウンター」ではなく **ウェルビーイングの一環**）
@@ -311,22 +311,32 @@ AIの推薦を決定事項にせず、本人とプロジェクト双方の意思
 
 ## 12. Color System
 
-ロゴの色を基準に、役割のある最小限のカラーパレットを設計します。ブランドガイド（6色パレット）と実装（hub-site の `:root`）の値を一致させ、確定トークンとして扱います。
+近黒の地に、朱赤から山吹へ変化する光を重ねます。朱赤は「人の働き」、山吹は「成果」を表し、その間のグラデーションを「働きが成果へ変わる過程」として扱います。
 
 ### Palette (Confirmed HEX)
 
 | Token | Name | HEX | 役割 |
 |---|---|---|---|
-| `--color-red` | Sun Red | `#C8452A` | Primary。重要アクション、人のぬくもり |
-| `--color-red-deep` | Sun Red / Deep | `#A63A22` | Primary の hover / active、濃い強調 |
-| `--color-yellow` | Sand Beige（山吹） | `#E4A02B` | Accent。気づき、補助強調、縒り線の一方 |
-| `--color-bg` | Off White | `#FBF7F0` | 背景 |
-| `--color-surface` | Beige | `#F2EBDD` | 面（カード、セクション） |
-| `--color-surface-2` | Greige | `#EAE1D0` | 一段沈んだ面、hover 面 |
-| `--color-border` | Border | `#E0D7C7` | 境界線 |
-| `--color-text` | Charcoal | `#332E29` | 本文 |
-| `--color-text-soft` | Charcoal / Soft | `#6C6257` | 補助文、キャプション |
-| `--color-white` | White | `#FFFFFF` | 反転文字、最前面の面 |
+| `--color-red` | Human Red | `#E4572E` | 人の働き、グラデーションの起点 |
+| `--color-red-deep` | Human Red / Deep | `#C8452A` | 番号・ドット、低発光時の補助 |
+| `--color-yellow` | Outcome Gold | `#E4A02B` | 成果、グラデーションの終点 |
+| `--color-bg` | Ground | `#120F0A` | ページ背景 |
+| `--color-bg-raised` | Ground / Raised | `#17150F` | ナビ、沈んだ面 |
+| `--color-surface` | Glass | `rgba(24,20,16,.30)` | カード、セクション |
+| `--color-surface-2` | Glass / Hover | `rgba(255,255,255,.07)` | hover 面 |
+| `--color-border` | Glass Edge | `rgba(255,255,255,.13)` | 境界線 |
+| `--color-text` | Warm White | `#F7F1E7` | 見出し・本文 |
+| `--color-text-soft` | Warm Gray | `#BDB4A6` | 補助文、キャプション |
+| `--color-white` | White | `#FFFFFF` | 最前面の文字 |
+
+### Gradient（限定使用）
+
+```css
+--gradient-core:linear-gradient(100deg,#E4572E 0%,#E4A02B 100%);
+--gradient-core-3:linear-gradient(100deg,#E4572E 0%,#E4572E 42%,#E4A02B 100%);
+```
+
+使用箇所は、背景グロー、縒り線・区切り、プライマリCTAの縁、キーワードの下線、番号・ドットに限定します。グラデーション文字と、大きな面のベタ塗りには使いません。
 
 ### State Colors
 
@@ -337,17 +347,16 @@ AIの推薦を決定事項にせず、本人とプロジェクト双方の意思
 | `--color-error` | `#A01B12` | エラー。朱赤より深く青みのある赤。必ず ⚠ アイコン＋テキスト併用 |
 | `--color-success` | `#3E6B4E` | 成功。彩度を抑えたセージ。✓ アイコン＋テキスト併用 |
 | `--color-warning` | `#B8791F` | 注意。山吹を一段沈めた色。⚠ アイコン＋テキスト併用 |
-| `--color-focus` | `#A63A22` | フォーカスリング（deep red ベース） |
+| `--color-focus` | `#E4A02B` | フォーカスリング |
 
 ### Contrast（算出値・実装時にツール再検証）
 
 | 前景 / 背景 | 比率 | 判定 |
 |---|---|---|
-| `--color-text` #332E29 / `--color-bg` #FBF7F0 | ≈ 12.6:1 | AAA |
-| `--color-text-soft` #6C6257 / `--color-bg` | ≈ 5.6:1 | AA（本文可） |
-| White / `--color-red` #C8452A | ≈ 4.8:1 | AA（本文可・ぎりぎり → 太字/大サイズ推奨） |
-| White / `--color-red-deep` #A63A22 | ≈ 6.2:1 | AA |
-| `--color-yellow` #E4A02B / `--color-bg`（文字利用時） | ≈ 1.7:1 | ✗ 本文不可（アクセント専用） |
+| `--color-text` #F7F1E7 / `--color-bg` #120F0A | ≈ 17.0:1 | AAA |
+| `--color-text-soft` #BDB4A6 / `--color-bg` | ≈ 9.3:1 | AAA |
+| `--color-yellow` #E4A02B / `--color-bg` | ≈ 8.5:1 | AAA（アクセント専用） |
+| `--color-red` #E4572E / `--color-bg` | ≈ 5.2:1 | AA |
 
 ※上記は算出値。実装時に自動ツール（axe / WebAIM 等）で最終検証する。
 
@@ -375,9 +384,9 @@ AIの推薦を決定事項にせず、本人とプロジェクト双方の意思
 
 | Role | Family | Fallback |
 |---|---|---|
-| Heading / Display | **Noto Sans JP**（Bold 700 / SemiBold 600） | `"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif` |
-| Body | **Noto Sans JP**（Regular 400 / Medium 500） | 同上 |
-| Latin / 数字 | Noto Sans | `system-ui` |
+| Heading / Display | **Zen Kaku Gothic New**（Bold 700 / Medium 500） | `"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif` |
+| Body | **IBM Plex Sans JP**（Regular 400 / Medium 500） | `"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif` |
+| Latin / 数字 | IBM Plex Sans | `system-ui` |
 
 - ロゴのワードマークは専用ロゴデータを使用し、本文フォントで代替しない。
 - **丸ゴシックは使わない**（幼く見えるため。§8「やさしいが、幼くない」）。
@@ -389,19 +398,19 @@ AIの推薦を決定事項にせず、本人とプロジェクト双方の意思
 
 | Token | 用途 | size | line-height | weight | letter-spacing |
 |---|---|---|---|---|---|
-| `--fs-display` | ページ主見出し | 2.5rem (40px) | 1.3 | **700** | -0.01em |
-| `--fs-h1` | H1 | 2rem (32px) | 1.35 | **700** | -0.01em |
-| `--fs-h2` | H2 | 1.5rem (24px) | 1.4 | **700** | 0 |
-| `--fs-h3` | H3 | 1.25rem (20px) | 1.5 | **600** | 0 |
+| `--fs-display` | ページ主見出し | 2.5rem (40px) | 1.3 | **700** | 0.06em |
+| `--fs-h1` | H1 | 2rem (32px) | 1.35 | **700** | 0.06em |
+| `--fs-h2` | H2 | 1.5rem (24px) | 1.4 | **700** | 0.05em |
+| `--fs-h3` | H3 | 1.25rem (20px) | 1.5 | **600** | 0.04em |
 | `--fs-body-lg` | リード文 | 1.125rem (18px) | 1.8 | 400 | 0.01em |
 | `--fs-body` | 本文 | 1rem (16px) | 1.7 | 400 | 0.01em |
 | `--fs-sm` | 補助 | 0.875rem (14px) | 1.6 | 400 | 0.02em |
 | `--fs-caption` | キャプション（最小） | 0.8125rem (13px) | 1.5 | 400 | 0.02em |
 
-- family は全て **Noto Sans JP**（見出しも本文も同一）。
+- 見出しは **Zen Kaku Gothic New**、本文は **IBM Plex Sans JP**。
 - 13px を最小とし、これより小さい文字を本文・ラベルに使わない。
 - **見出しと本文の差は「ウェイト（700/600 vs 400）＋サイズ＋余白」でつける。** 書体を変えない。
-- 大きい見出しほど字間をわずかに詰める（-0.01em）と、ゴシックでも締まって見える。
+- 見出しの字間は `0.06em` を基準に開け、余白と「急かさない」人格を表す。
 
 ### Typography Rules
 
@@ -770,7 +779,7 @@ v0.2 で以下を確定した（→ **Part II §24–26** 参照）。
 - プライバシー、データ利用、AI説明に関する表示要件
 - ユーザビリティテスト計画
 - デザイン・コンテンツレビュー体制
-- ダークモード対応方針
+- ライトテーマを追加する場合の適用範囲と反転ルール
 
 ---
 
@@ -790,7 +799,7 @@ Yoriyoiのデザインは、温かく、静かで、知的であること。情�
 
 ---
 
-# Part II — Implementation Tokens (v0.2)
+# Part II — Implementation Tokens (v1.0)
 
 このパートは §22 の「今後定義」を確定したもの。色・文字は §12 / §13、その他の基盤を以下に定義する。
 
@@ -823,13 +832,13 @@ Yoriyoiのデザインは、温かく、静かで、知的であること。情�
 
 ### Elevation（Shadow）
 
-影は弱く、紙の質感に馴染ませる。
+影はガラス面を暗地から浮かせるため、柔らかく大きくします。上端の光を inset shadow で足します。
 
 | Token | 値 |
 |---|---|
-| `--shadow-sm` | `0 1px 3px rgba(51,46,41,.05)` |
-| `--shadow` | `0 2px 8px rgba(51,46,41,.06)` |
-| `--shadow-lg` | `0 8px 24px rgba(51,46,41,.10)` |
+| `--shadow-sm` | `inset 0 1px 0 rgba(255,255,255,.12)` |
+| `--shadow` | `inset 0 1px 0 rgba(255,255,255,.16), 0 16px 36px rgba(0,0,0,.32)` |
+| `--shadow-lg` | `inset 0 1px 0 rgba(255,255,255,.16), 0 24px 50px rgba(0,0,0,.42)` |
 
 ### Breakpoints & Container
 
@@ -850,15 +859,17 @@ Yoriyoiのデザインは、温かく、静かで、知的であること。情�
 ```css
 :root{
   /* color */
-  --color-red:#C8452A; --color-red-deep:#A63A22; --color-yellow:#E4A02B;
-  --color-bg:#FBF7F0; --color-surface:#F2EBDD; --color-surface-2:#EAE1D0;
-  --color-border:#E0D7C7; --color-text:#332E29; --color-text-soft:#6C6257; --color-white:#fff;
-  --color-error:#A01B12; --color-success:#3E6B4E; --color-warning:#B8791F; --color-focus:#A63A22;
+  --color-red:#E4572E; --color-red-deep:#C8452A; --color-yellow:#E4A02B;
+  --color-bg:#120F0A; --color-bg-raised:#17150F;
+  --color-surface:rgba(24,20,16,.30); --color-surface-2:rgba(255,255,255,.07);
+  --color-border:rgba(255,255,255,.13); --color-text:#F7F1E7; --color-text-soft:#BDB4A6; --color-white:#fff;
+  --gradient-core:linear-gradient(100deg,#E4572E 0%,#E4A02B 100%); --glass-blur:22px;
+  --color-error:#FF7A67; --color-success:#83C99A; --color-warning:#E4A02B; --color-focus:#E4A02B;
   /* radius / shadow */
   --radius-sm:8px; --radius:14px; --radius-lg:20px; --radius-pill:999px;
-  --shadow-sm:0 1px 3px rgba(51,46,41,.05);
-  --shadow:0 2px 8px rgba(51,46,41,.06);
-  --shadow-lg:0 8px 24px rgba(51,46,41,.10);
+  --shadow-sm:inset 0 1px 0 rgba(255,255,255,.12);
+  --shadow:inset 0 1px 0 rgba(255,255,255,.16),0 16px 36px rgba(0,0,0,.32);
+  --shadow-lg:inset 0 1px 0 rgba(255,255,255,.16),0 24px 50px rgba(0,0,0,.42);
   /* spacing */
   --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px;
   --space-6:32px; --space-8:48px; --space-10:64px; --space-12:96px;
@@ -872,12 +883,11 @@ hub-site の現行 `:root`（`--red` 等）はこの命名へ段階的に寄せ�
 トークン参照で最小仕様を定義する（§16 の思想を実装値に落としたもの）。共通: タップ領域 min 44×44px、フォーカスは `--color-focus` の 2px outline + 2px offset。
 
 ### Button / Primary
-- bg `--color-text`（墨 #332E29）→ hover `#211D19`、文字 `--color-white`（weight 500）
+- 黒地 `#0E0C0A`、文字 `--color-white`（weight 600）、外周に `--gradient-core`
 - padding `12px 20px`、radius `--radius`、min-height 44px
 - 最重要アクション 1〜2 個まで（§16）。例:「相性を確認する」
 
-> **なぜ墨か（HCD判断）**: 白文字コントラスト ≈ 12.6:1（AAA）で安全。飽和した赤ベタは UI 慣習上「緊急・警告」に寄り、§9.6「急かさない」トーンや `--color-error`（赤）と競合する。ブランドガイドでも朱赤は「細い縒り線のアクセント」で面ベタには使っていない。よって **プライマリ面は墨、朱赤×山吹は縒りアイコン/ラインのアクセント**として残す。
-> 温かさを主役にしたい文脈では、深い朱赤 `--color-red-deep`（#A63A22, ≈ 6.2:1）を warm 系プライマリの代替として可。鮮やかな `--color-red`（#C8452A, ≈ 4.8:1）は面ベタCTAには非推奨（アクセント専用）。
+- hover はオレンジの外グローを少し強めます。グラデーションを面には敷きません。
 
 ### Button / Secondary
 - bg `--color-surface`、文字 `--color-text`、border 1px `--color-border`
@@ -893,7 +903,7 @@ hub-site の現行 `:root`（`--red` 等）はこの命名へ段階的に寄せ�
 - 外部リンクは視覚的に明示（シェブロン / ↗）＋ `rel="noopener"`
 
 ### Card
-- 面 `--color-surface`、border 1px `--color-border`、radius `--radius`、shadow `--shadow-sm`、padding `--space-5`
+- 面 `--color-surface`、`backdrop-filter:blur(22px)`、border 1px `--color-border`、radius `--radius`、shadow `--shadow`、padding `--space-5`
 
 ### Input / Form
 - 面 `--color-white`、border 1px `--color-border`、radius `--radius-sm`、padding `12px`
@@ -906,7 +916,7 @@ hub-site の現行 `:root`（`--red` 等）はこの命名へ段階的に寄せ�
 
 ## 26. Pattern & Motif Library
 
-ブランドガイドのエンボス 4 文様を、UI の「ごく控えめな地紋」として定義する。
+ブランドガイドの4文様は、Dark Glass の主表現と競合しない補助素材として定義する。
 
 | 文様 | 読み | 意味 | UI での用途 |
 |---|---|---|---|
@@ -916,7 +926,8 @@ hub-site の現行 `:root`（`--red` 等）はこの命名へ段階的に寄せ�
 | 檜垣文様 | ひがき | 守り・厄除け | カバー画像のプレースホルダ等 |
 
 ### Usage Rules
-- トーンオントーン（オフホワイト／ベージュ上に極低コントラスト）で、エンボス＝紙の質感として扱う。opacity は目安 3–8%。
+- 近黒上に白または山吹を極低コントラストで重ね、opacity は目安 2–5%。
+- 背景グローと同じ領域には置かず、光と文様を競合させない。
 - 本文テキストの直下には敷かない（可読性優先）。
 - 一画面で使う文様は基本 1 種類。複数を混在させない。
 - §14 の禁止（婚礼・宗教・和風に寄りすぎ）を必ず参照。柄を「装飾の主役」にしない。

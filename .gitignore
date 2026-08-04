@@ -10,5 +10,13 @@ assets/patterns/*.jpg
 assets/logo/yoriyoi_fab.svg
 assets/logo/yoriyoi_fab-*.png
 
+# 公開しない編集用デザイン元データ
+# 公開用に書き出した SVG / PNG / JPG のみ Git で管理する
+*.ai
+*.psd
+*.indd
+assets/logo/_check.html
+assets/logo/*_backup.svg
+
 # Discord等の内部進捗ログ（ローカル専用）
 logs/
